@@ -1,0 +1,8 @@
+C:/Users/Pol/source/repos/SDL2Template/vcpkg_installed/x64-windows/vcpkg/pkgs/wavpack_x64-windows/lib/wavpackdll.lib
+C:/Users/Pol/source/repos/SDL2Template/vcpkg_installed/x64-windows/vcpkg/pkgs/wavpack_x64-windows/bin/wavpackdll.dll
+C:/Users/Pol/source/repos/SDL2Template/vcpkg_installed/x64-windows/vcpkg/pkgs/wavpack_x64-windows/include/wavpack/wavpack.h
+C:/Users/Pol/source/repos/SDL2Template/vcpkg_installed/x64-windows/vcpkg/pkgs/wavpack_x64-windows/cmake/wavpack-config.cmake
+C:/Users/Pol/source/repos/SDL2Template/vcpkg_installed/x64-windows/vcpkg/pkgs/wavpack_x64-windows/cmake/wavpack-targets.cmake
+C:/Users/Pol/source/repos/SDL2Template/vcpkg_installed/x64-windows/vcpkg/pkgs/wavpack_x64-windows/cmake/wavpack-targets-release.cmake
+C:/Users/Pol/source/repos/SDL2Template/vcpkg_installed/x64-windows/vcpkg/pkgs/wavpack_x64-windows/cmake/wavpack-config-version.cmake
+C:/Users/Pol/source/repos/SDL2Template/vcpkg_installed/x64-windows/vcpkg/pkgs/wavpack_x64-windows/lib/pkgconfig/wavpack.pc

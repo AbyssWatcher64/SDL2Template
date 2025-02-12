@@ -1,0 +1,9 @@
+C:/Users/Pol/source/repos/SDL2Template/vcpkg_installed/x64-windows/vcpkg/pkgs/sdl2-mixer_x64-windows/debug/lib/SDL2_mixerd.lib
+C:/Users/Pol/source/repos/SDL2Template/vcpkg_installed/x64-windows/vcpkg/pkgs/sdl2-mixer_x64-windows/debug/bin/SDL2_mixerd.dll
+C:/Users/Pol/source/repos/SDL2Template/vcpkg_installed/x64-windows/vcpkg/pkgs/sdl2-mixer_x64-windows/debug/include/SDL2/SDL_mixer.h
+C:/Users/Pol/source/repos/SDL2Template/vcpkg_installed/x64-windows/vcpkg/pkgs/sdl2-mixer_x64-windows/debug/lib/cmake/SDL2_mixer/SDL2_mixerConfig.cmake
+C:/Users/Pol/source/repos/SDL2Template/vcpkg_installed/x64-windows/vcpkg/pkgs/sdl2-mixer_x64-windows/debug/lib/cmake/SDL2_mixer/SDL2_mixerConfigVersion.cmake
+C:/Users/Pol/source/repos/SDL2Template/vcpkg_installed/x64-windows/vcpkg/pkgs/sdl2-mixer_x64-windows/debug/lib/cmake/SDL2_mixer/SDL2_mixer-shared-targets.cmake
+C:/Users/Pol/source/repos/SDL2Template/vcpkg_installed/x64-windows/vcpkg/pkgs/sdl2-mixer_x64-windows/debug/lib/cmake/SDL2_mixer/SDL2_mixer-shared-targets-debug.cmake
+C:/Users/Pol/source/repos/SDL2Template/vcpkg_installed/x64-windows/vcpkg/pkgs/sdl2-mixer_x64-windows/debug/lib/pkgconfig/SDL2_mixer.pc
+C:/Users/Pol/source/repos/SDL2Template/vcpkg_installed/x64-windows/vcpkg/pkgs/sdl2-mixer_x64-windows/debug/share/licenses/SDL2_mixer/LICENSE.txt

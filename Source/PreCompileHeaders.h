@@ -9,8 +9,8 @@
 #include <SDL2/SDL.h>
 #include <memory>
 
-#include "Engine.h"
-#include "Timer.h"
-#include "Log.h"
+#include "Engine.hpp"
+#include "Timer.hpp"
+#include "Log.hpp"
 
 #endif // PCH_H

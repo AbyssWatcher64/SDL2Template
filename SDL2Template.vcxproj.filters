@@ -39,6 +39,15 @@
     <ClCompile Include="Source\Log.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
+    <ClCompile Include="Source\EngineFSM.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Window.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\PrecisionTimer.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="vcpkg.json">
@@ -49,16 +58,28 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\Engine.h">
+    <ClInclude Include="Source\PrecisionTimer.hpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Engine.hpp">
       <Filter>Source Files\Engine</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Timer.h">
+    <ClInclude Include="Source\EngineFSM.hpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Module.hpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Window.hpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Log.hpp">
       <Filter>Source Files\Utils</Filter>
     </ClInclude>
     <ClInclude Include="Source\PreCompileHeaders.h">
       <Filter>Source Files\Utils</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Log.h">
+    <ClInclude Include="Source\Timer.hpp">
       <Filter>Source Files\Utils</Filter>
     </ClInclude>
   </ItemGroup>

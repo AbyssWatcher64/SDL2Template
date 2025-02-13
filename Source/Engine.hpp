@@ -1,7 +1,11 @@
 #pragma once
 #include "PreCompileHeaders.h"
+#include "EngineFSM.hpp"
+#include "PrecisionTimer.hpp"
 
 class Module;
+
+class Window;
 
 class Engine
 {
@@ -11,18 +15,7 @@ public:
 
 	void AddModule(std::shared_ptr<Module> module);
 
-	enum EngineState
-	{
-		FAIL = -1,
-		EXIT = 0,
-		CREATE = 1,
-		AWAKE,
-		START,
-		LOOP,
-		CLEAN
-	};
-
-	int Run(); // Main loop
+	int Run(); // Main loop for the FSM
 
 	// Called before renderer is available
 	bool Awake();
@@ -48,18 +41,7 @@ private:
 	Engine(const Engine&) = delete;
 	Engine& operator=(const Engine&) = delete;
 
-	// Function pointers for FSM
-	using StateFunction = EngineState(Engine::*)();
-	EngineState StateCreate();
-	EngineState StateAwake();
-	EngineState StateStart();
-	EngineState StateLoop();
-	EngineState StateClean();
-	EngineState StateFail();
-
-	// State execution
-	EngineState ExecuteState(EngineState state);
-
+	EngineFSM fsm;
 
 	// Each frame consists of the following steps, which go in order:
 	// 1. Call modules before each loop iteration
@@ -82,9 +64,21 @@ private:
 
 
 public:
+	// Modules
+	std::shared_ptr<Window> window;
+
 private:
 	
 	std::list<std::shared_ptr<Module>> moduleList;
+	float dt;
+	PrecisionTimer frameTimer;
+	PrecisionTimer lastSecFrameTimer;
+
+	//Maximum frame duration in miliseconds.
+	int maxFrameDuration = 16;
+
+	int framesPerSecond = 0;
+	int lastSecFrameCount = 0;
 
 	bool isDebugModeActive = true;
 };

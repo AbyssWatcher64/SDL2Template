@@ -1,4 +1,4 @@
-#include "Timer.h"
+#include "Timer.hpp"
 #include "SDL2\SDL_timer.h"
 
 Timer::Timer()

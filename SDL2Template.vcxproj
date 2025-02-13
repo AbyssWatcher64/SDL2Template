@@ -137,12 +137,19 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\Engine.cpp" />
+    <ClCompile Include="Source\EngineFSM.cpp" />
     <ClCompile Include="Source\Log.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Source\Main.cpp" />
+    <ClCompile Include="Source\PrecisionTimer.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="Source\PreCompileHeaders.cpp" />
     <ClCompile Include="Source\Timer.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Source\Window.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
   </ItemGroup>
@@ -151,10 +158,14 @@
     <None Include="vcpkg.json" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\Engine.h" />
-    <ClInclude Include="Source\Log.h" />
+    <ClInclude Include="Source\Engine.hpp" />
+    <ClInclude Include="Source\EngineFSM.hpp" />
+    <ClInclude Include="Source\Log.hpp" />
+    <ClInclude Include="Source\Module.hpp" />
+    <ClInclude Include="Source\PrecisionTimer.hpp" />
     <ClInclude Include="Source\PreCompileHeaders.h" />
-    <ClInclude Include="Source\Timer.h" />
+    <ClInclude Include="Source\Timer.hpp" />
+    <ClInclude Include="Source\Window.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

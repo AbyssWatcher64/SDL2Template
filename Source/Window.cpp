@@ -13,6 +13,7 @@ Window::~Window()
 {
 }
 
+// For pixel art check: https://sneslab.net/wiki/Widescreen
 bool Window::Awake()
 {
 	LOG("== Initializing SDL window ==");
@@ -34,8 +35,8 @@ bool Window::Awake()
 		std::string gameTitle = "RPG Game";
 
 		//TODO Get the values from the config file
-		width = 1080;
-		height = 720;
+		width = 352;
+		height = 224;
 		scale = 1;
 
 		if (fullscreen == true) flags |= SDL_WINDOW_FULLSCREEN;
@@ -43,20 +44,24 @@ bool Window::Awake()
 		if (resizable == true) flags |= SDL_WINDOW_RESIZABLE;
 		if (fullscreen_window == true) flags |= SDL_WINDOW_FULLSCREEN_DESKTOP;
 
-		window = SDL_CreateWindow(gameTitle.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, flags);
+		window = SDL_CreateWindow(gameTitle.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width * scale, height * scale, flags);
 		if (window == NULL)
 		{
 			LOG("Window could not be created! SDL_Error: %s\n", SDL_GetError());
 			ret = false;
 		}
 
-		//icon = IMG_Load("./Assets/UI/brandicon.png");
+		icon = IMG_Load("./Assets/UI/Misc/EngineIcon.png");
 		if (icon == NULL)
 		{
 			LOG("Icon could not be loaded into the window! SDL_Error: %s\n", SDL_GetError());
 			ret = false;
 		}
-
+		else
+		{
+			SDL_SetWindowIcon(window, icon);
+			SDL_FreeSurface(icon);  
+		}
 		//SDL_SetWindowIcon(window, icon);
 	}
 
@@ -71,8 +76,8 @@ bool Window::CleanUp()
 	if (window != NULL)
 	{
 		SDL_DestroyWindow(window);
+		window = NULL;
 	}
-	else
 
 	// Quit SDL subsystems
 	SDL_Quit();
@@ -83,3 +88,11 @@ int Window::GetScale() const
 {
 	return scale;
 }
+
+// TODO: Change this to return a vector? 
+// Store windowWidth and windowHeight as scaled values when creating the window.
+//void Window::GetWindowSize(int& outWidth, int& outHeight) const
+//{
+//	outWidth = width * scale;
+//	outHeight = height * scale;
+//}

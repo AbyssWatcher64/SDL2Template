@@ -12,5 +12,6 @@
 #include "Engine.hpp"
 #include "Timer.hpp"
 #include "Log.hpp"
+#include "Vector2D.hpp"
 
 #endif // PCH_H

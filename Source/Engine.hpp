@@ -5,7 +5,9 @@
 
 class Module;
 
+// Module classes
 class Window;
+class Input;
 
 class Engine
 {
@@ -66,6 +68,7 @@ private:
 public:
 	// Modules
 	std::shared_ptr<Window> window;
+	std::shared_ptr<Input> input;
 
 private:
 	

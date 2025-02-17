@@ -3,6 +3,7 @@
 
 // Module includes
 #include "Window.hpp"
+#include "Input.hpp"
 
 
 Engine::Engine()
@@ -12,6 +13,7 @@ Engine::Engine()
 
 	// TODO: Include all modules
 	window = std::make_shared<Window>();	AddModule(window);
+	input = std::make_shared<Input>();		AddModule(input);
 }
 
 Engine& Engine::Singleton()

@@ -13,11 +13,8 @@ public:
 	// Destructor
 	virtual ~Window();
 
-	// Called before renderer is available
-	bool Awake();
-
-	// Called before quitting
-	bool CleanUp();
+	bool Awake() override;
+	bool CleanUp() override;
 
 	// Changae title
 	void SetTitle(const char* title);

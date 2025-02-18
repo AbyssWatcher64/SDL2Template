@@ -2,8 +2,6 @@
 #include "Input.hpp"
 #include "Window.hpp"
 
-#define MAX_KEYS 300
-
 Input::Input() : Module(), keyboard(MAX_KEYS, KEY_IDLE)
 {
     name = "input";

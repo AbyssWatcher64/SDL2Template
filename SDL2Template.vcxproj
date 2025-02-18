@@ -147,6 +147,9 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Source\PreCompileHeaders.cpp" />
+    <ClCompile Include="Source\Renderer.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="Source\Timer.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
@@ -169,6 +172,7 @@
     <ClInclude Include="Source\Module.hpp" />
     <ClInclude Include="Source\PrecisionTimer.hpp" />
     <ClInclude Include="Source\PreCompileHeaders.h" />
+    <ClInclude Include="Source\Renderer.hpp" />
     <ClInclude Include="Source\Timer.hpp" />
     <ClInclude Include="Source\Vector2D.hpp" />
     <ClInclude Include="Source\Window.hpp" />

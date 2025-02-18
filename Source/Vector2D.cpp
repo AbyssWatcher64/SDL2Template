@@ -7,6 +7,8 @@
 Vector2D::Vector2D() : x(0), y(0) {}
 Vector2D::Vector2D(int x, int y) : x(x), y(y) {}
 
+Vector2D::~Vector2D() {}
+
 // Setters & Getters
 int Vector2D::GetX() const { return x; }
 int Vector2D::GetY() const { return y; }

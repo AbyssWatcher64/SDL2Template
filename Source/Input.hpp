@@ -1,9 +1,8 @@
 #pragma once
-#include "PreCompileHeaders.h"
-
 #include "Module.hpp"
 
 #define NUM_MOUSE_BUTTONS 5
+#define MAX_KEYS 300
 
 enum WindowEvent
 {

@@ -1,39 +1,36 @@
 #pragma once
-
-#include "PreCompileHeaders.h"
 #include "Module.hpp"
-#include "SDL2/SDL_Video.h"
 
 class Window : public Module
 {
 public:
-
+	// Constructor
 	Window();
 
 	// Destructor
 	virtual ~Window();
 
+	// Module functions
 	bool Awake() override;
 	bool CleanUp() override;
 
-	// Changae title
-	void SetTitle(const char* title);
+	// Change title
+	//void SetTitle(const char* title);
 
-	// TODO, maybe?
-	// Retrive window size
-	void GetWindowSize(int& width, int& height) const;
+	// TODO, maybe - Retrive window size
+	//void GetWindowSize(int& width, int& height) const;
 
 	// Retrieve window scale
 	int GetScale() const;
 
-	// The window we'll be rendering to
+	// Getter of the window
+	SDL_Window* GetWindow() const;
+
 private:
 	SDL_Surface* icon;
-	std::string title;
-
-public:
 	SDL_Window* window;
 
+	std::string title;
 	int width;
 	int height;
 	int scale;

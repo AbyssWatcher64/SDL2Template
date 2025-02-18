@@ -1,5 +1,4 @@
 #include "PreCompileHeaders.h" //Engine.h included in the PCH
-#include "Module.hpp"
 
 // Module includes
 #include "Window.hpp"

@@ -32,7 +32,7 @@ bool Window::Awake()
 		bool borderless = false;
 		bool resizable = false;
 		bool fullscreen_window = false;
-		std::string gameTitle = "RPG Game";
+		std::string gameTitle = "SDL Engine Template";
 
 		//TODO Get the values from the config file
 		width = 352;
@@ -62,7 +62,6 @@ bool Window::Awake()
 			SDL_SetWindowIcon(window, icon);
 			SDL_FreeSurface(icon);  
 		}
-		//SDL_SetWindowIcon(window, icon);
 	}
 
 	return ret;
@@ -84,11 +83,6 @@ bool Window::CleanUp()
 	return true;
 }
 
-int Window::GetScale() const
-{
-	return scale;
-}
-
 // TODO: Change this to return a vector? 
 // Store windowWidth and windowHeight as scaled values when creating the window.
 //void Window::GetWindowSize(int& outWidth, int& outHeight) const
@@ -96,3 +90,14 @@ int Window::GetScale() const
 //	outWidth = width * scale;
 //	outHeight = height * scale;
 //}
+
+int Window::GetScale() const
+{
+	return scale;
+}
+
+SDL_Window* Window::GetWindow() const
+{
+	return window;
+}
+

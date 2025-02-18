@@ -54,6 +54,9 @@
     <ClCompile Include="Source\Vector2D.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Renderer.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="vcpkg.json">
@@ -93,6 +96,9 @@
     </ClInclude>
     <ClInclude Include="Source\Vector2D.hpp">
       <Filter>Source Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Renderer.hpp">
+      <Filter>Source Files\Engine</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

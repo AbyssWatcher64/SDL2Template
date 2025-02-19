@@ -3,6 +3,7 @@
 // Module includes
 #include "Window.hpp"
 #include "Input.hpp"
+#include "Renderer.hpp"
 
 
 Engine::Engine()
@@ -11,8 +12,9 @@ Engine::Engine()
 	lastSecFrameTimer = PrecisionTimer();
 
 	// TODO: Include all modules
-	window = std::make_shared<Window>();	AddModule(window);
-	input = std::make_shared<Input>();		AddModule(input);
+	window = std::make_shared<Window>();		AddModule(window);
+	input = std::make_shared<Input>();			AddModule(input);
+	renderer = std::make_shared<Renderer>();	AddModule(renderer);
 }
 
 Engine& Engine::Singleton()

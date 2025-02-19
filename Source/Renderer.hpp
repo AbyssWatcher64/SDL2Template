@@ -22,14 +22,19 @@ public:
 
 	// Viewports
 	void SetViewPort(const SDL_Rect& rect);
+	// TEMP FUNCTION
+	bool ResizeViewPort(int screenWidth, int screenHeight);
 	void ResetViewPort();
 
 	// Drawing
 	bool DrawTexture(SDL_Texture* texture, Vector2D vector, const SDL_Rect* section = NULL, bool useCamera = true, float speed = 1.0f, double angle = 0, int pivotX = INT_MAX, int pivotY = INT_MAX) const;
-	bool DrawTextureDifferentScale(SDL_Texture* texture, Vector2D vector, const SDL_Rect* section = NULL, int scaleFactor = 3, bool useCamera = true, float speed = 1.0f, double angle = 0, int pivotX = INT_MAX, int pivotY = INT_MAX) const;
+	//bool DrawTextureDifferentScale(SDL_Texture* texture, Vector2D vector, const SDL_Rect* section = NULL, int scaleFactor = 3, bool useCamera = true, float speed = 1.0f, double angle = 0, int pivotX = INT_MAX, int pivotY = INT_MAX) const;
 	bool DrawRectangle(const SDL_Rect& rect, SDL_Color rgb, bool filled = true, bool useCamera = true) const;
 	bool DrawLine(Vector2D vector1, Vector2D vector2, SDL_Color rgb, bool useCamera = true) const;
 	bool DrawCircle(Vector2D vector, int radius, SDL_Color rgb, bool useCamera = true) const;
+
+
+
 	// Commenting because I'm trying with the RGB struct and Vector instead of two points
 	//bool DrawRectangle(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uint8 a = 255, bool filled = true, bool useCamera = true) const;
 	//bool DrawLine(int x1, int y1, int x2, int y2, Uint8 r, Uint8 g, Uint8 b, Uint8 a = 255, bool useCamera = true) const;

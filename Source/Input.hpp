@@ -37,6 +37,16 @@ public:
 
     bool GetWindowEvent(WindowEvent ev) const;
 
+    void SetKeyboardKeyState(const Uint8* keys);
+    void SetKeyboardKeyStateIfKeyPressed(int key);
+    void SetKeyboardKeyStateIfNoKeyPressed(int key);
+    void SetMouseKeyState();
+
+    void ProcessSDLEvent(const SDL_Event& event);
+    void HandleWindowEvent(Uint8 windowEvent);
+    void UpdateMouseMotion(const SDL_MouseMotionEvent& motion);
+
+
     Vector2D GetMousePosition() const;
     Vector2D GetMouseMotion() const;
 

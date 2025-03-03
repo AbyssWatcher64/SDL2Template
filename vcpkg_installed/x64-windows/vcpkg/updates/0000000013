@@ -1,7 +1,7 @@
-Package: sdl2-mixer
-Feature: wavpack
-Depends: wavpack
+Package: freetype
+Feature: bzip2
+Depends: bzip2
 Architecture: x64-windows
 Multi-Arch: same
-Description: Enable WavPack music.
-Status: install ok half-installed
+Description: Support bzip2 compressed fonts.
+Status: install ok installed

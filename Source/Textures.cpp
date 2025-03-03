@@ -46,13 +46,6 @@ bool Textures::CleanUp()
     }
     textures.clear();
 
-    // Free surfaces if necessary
-    for (auto& surfacePair : textureSurfaces)
-    {
-        SDL_FreeSurface(surfacePair.second);
-    }
-    textureSurfaces.clear();
-
     IMG_Quit();
     return true;
 }
@@ -75,9 +68,6 @@ SDL_Texture* const Textures::Load(std::string path)
     SDL_Texture* texture = LoadSurface(surface);
     SDL_FreeSurface(surface);
 
-    // Store the surface along with its path for reloading later
-    textureSurfaces.push_back(std::make_pair(path, surface));
-
     if (texture)
     {
         textures.push_back(texture);
@@ -85,25 +75,6 @@ SDL_Texture* const Textures::Load(std::string path)
 
     return texture;
 }
-
-
-void Textures::ReloadTextures()
-{
-	// Clear all current textures
-	for (SDL_Texture* texture : textures)
-	{
-		SDL_DestroyTexture(texture);
-	}
-	textures.clear();
-
-	// Recreate textures from the stored surfaces
-	for (auto& surfacePair : textureSurfaces)
-	{
-		SDL_Texture* newTexture = LoadSurface(surfacePair.second);
-		textures.push_back(newTexture); // Add the new texture to the textures vector
-	}
-}
-
 
 bool Textures::UnLoad(SDL_Texture* texture)
 {

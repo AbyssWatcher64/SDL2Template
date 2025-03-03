@@ -2,14 +2,15 @@
 #include "SDL2/SDL_render.h"
 #include <iostream>
 
-Renderable::Renderable(SDL_Texture* texture, SDL_Rect& section, bool forceDrawInsideCamera, int layer, double angle, int pivotX, int pivotY)
+Renderable::Renderable(SDL_Texture* texture, SDL_Rect& sourceRect, SDL_Rect& destRect, bool forceDrawInsideCamera, int layer, double angle, int pivotX, int pivotY)
 {
 	this->type = RenderType::TEXTURE;
 	this->texture = texture;
 	this->pivot.x = pivotX;
 	this->pivot.y = pivotY;
 	this->forceDrawInsideCamera = forceDrawInsideCamera;
-	this->rect = section;
+	this->sourceRect = sourceRect;
+	this->destRect = destRect;
 	this->layer = layer;
 	this->angle = angle;
 }

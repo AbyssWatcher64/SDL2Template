@@ -39,16 +39,12 @@ bool Scene::PreUpdate()
 
 bool Scene::Update(float dt)
 {
-	if (Engine::Singleton().input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN)
-	{
-		TMPPlayerTexture = Engine::Singleton().textures->Load("./Assets/Textures/Characters/GutsPixelArt_PROVISIONAL.png");
-	}
+
 	return true;
 }
 
 bool Scene::Render()
 {
-	SDL_Rect rect({ 0,0,0,0 });
 	Engine::Singleton().renderer->QueueDebugRectangle(SDL_Rect({ 0,0,50,50 }), { 0,0,255,255 }, true, false, Renderer::UI);
 	Engine::Singleton().renderer->QueueDebugRectangle(SDL_Rect({0,0,352,224}), {0,255,0,255}, true, true, Renderer::BACKGROUND);
 	Engine::Singleton().renderer->QueueDebugRectangle(SDL_Rect({10,10,332,204}), {0,122,255,255}, true, true, Renderer::BACKGROUND);
@@ -61,8 +57,9 @@ bool Scene::Render()
 	Engine::Singleton().renderer->QueueDebugRectangle(SDL_Rect({ 352 / 2, 224 / 2,1,1 }), { 255,0,0,255 }, true, true, Renderer::UI);
 	Engine::Singleton().renderer->QueueDebugLine({ 0,0 }, { 100,200 }, { 0,255,255,255 }, false, Renderer::UI);
 
-	SDL_Rect rectangle = SDL_Rect({ 0,0,48,67 });
-	Engine::Singleton().renderer->QueueTexture(TMPPlayerTexture, rectangle, false, Renderer::ENTITY);
+	SDL_Rect sourceRectangle = SDL_Rect({ 0,0,48,67 });
+	SDL_Rect destinationRectangle = SDL_Rect({ 100,0,48,67 });
+	Engine::Singleton().renderer->QueueTexture(TMPPlayerTexture, sourceRectangle, destinationRectangle, false, Renderer::ENTITY);
 
 	// TEMP Player movement
 	if (Engine::Singleton().input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)

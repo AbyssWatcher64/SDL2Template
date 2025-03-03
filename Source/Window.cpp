@@ -3,6 +3,7 @@
 #include "Module.hpp"
 #include "Renderer.hpp"
 #include "Textures.hpp"
+#include "IniParser.hpp"
 
 Window::Window() : Module()
 {
@@ -12,9 +13,7 @@ Window::Window() : Module()
 	engineIconPath = "./Assets/UI/Misc/EngineIcon.png";
 }
 
-Window::~Window()
-{
-}
+Window::~Window() {}
 
 // For resolution in SNES-like games check: https://sneslab.net/wiki/Widescreen
 bool Window::Awake()
@@ -50,14 +49,6 @@ bool Window::CleanUp()
 	return true;
 }
 
-// TODO: Change this to return a vector? 
-// Store windowWidth and windowHeight as scaled values when creating the window.
-//void Window::GetWindowSize(int& outWidth, int& outHeight) const
-//{
-//	outWidth = width * scale;
-//	outHeight = height * scale;
-//}
-
 bool Window::AttemptToCreateWindowAndSetIcon()
 {
 	bool ret = true;
@@ -78,22 +69,15 @@ Uint32 Window::InitializeAndSetWindowFlags()
 
 WindowFlagBools Window::InitializeWindowFlags()
 {
-	//WindowFlagBools flagBools;
-	//flagBools.fullscreen = false;
-	//flagBools.borderless = false;
-	//flagBools.resizable = false;
-	//flagBools.fullscreenWindow = false;
-	//return flagBools;
+	std::unordered_map<std::string, std::string> configFile = LoadConfig("config.ini");
 
-	// Grab flags from ConfigXML file
 	WindowFlagBools flagBools{};
-	if (TMP_SETFULLSCREEN)
-	{
-		flagBools.fullscreen = true;
-	}
+	flagBools.fullscreen = GetBoolFromConfig(configFile, "fullscreen");
+	flagBools.borderless = GetBoolFromConfig(configFile, "borderless");
+	flagBools.resizable = GetBoolFromConfig(configFile, "resizable");
+	flagBools.fullscreenWindow = GetBoolFromConfig(configFile, "fullscreen_window");
 
 	return flagBools;
-	//return WindowFlagBools{}; // Automatically initializes all fields to false
 }
 
 Uint32 Window::SetFlagsForWindow(WindowFlagBools flagBools)
@@ -108,9 +92,10 @@ Uint32 Window::SetFlagsForWindow(WindowFlagBools flagBools)
 
 void Window::InitializeWindowSize()
 {
-	// TODO Get the values from the config file
-	width = 352;
-	height = 224;
+	std::unordered_map<std::string, std::string> configFile = LoadConfig("config.ini");
+
+	width = GetIntFromConfig(configFile, "width_resolution");
+	height = GetIntFromConfig(configFile, "height_resolution");
 }
 
 bool Window::AttemptToCreateWindow(const std::string& windowName, Uint32 flags)
@@ -139,43 +124,40 @@ bool Window::AttemptToSetWindowIcon(const std::string& path)
 		SDL_SetWindowIcon(window, icon);
 		SDL_FreeSurface(icon);
 	}
+	icon = nullptr;
 	return ret;
 }
 
-// I don't like this.
-//Vector2D Window::GetWindowSize() const
-//{
-//	return Vector2D(width, height);
-//}
 void Window::ChangeResolution(int newWidth, int newHeight)
 {
 	width = newWidth;
 	height = newHeight;
 
-	LOG("EVENT: Deleting current window and changing resolution to: %d x %d", width, height);
-	//SDL_SetWindowSize(window, width, height);
-	DeleteWindow();
-
-	AttemptToCreateWindowAndSetIcon();
-
-	Engine::Singleton().renderer->RecreateRenderer();
+	LOG("EVENT: Changing resolution to: %d x %d", width, height);
+	SDL_SetWindowSize(window, width, height);
+	SDL_SetWindowPosition(window, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
 	Engine::Singleton().renderer->ResizeViewPort(width, height);
-	//Engine::Singleton().textures->ReloadTextures();
+
+	std::unordered_map<std::string, std::string> configFile = LoadConfig("config.ini");
+	configFile.find("width_resolution")->second = std::to_string(newWidth);
+	configFile.find("height_resolution")->second = std::to_string(newHeight);
+	SaveConfig("config.ini", configFile);
 }
 
 void Window::ToggleFullScreen()
 {
 	LOG("EVENT: Deleting current window and changing resolution to: %d x %d", width, height);
-	DeleteWindow();
 
 	TMP_SETFULLSCREEN = !TMP_SETFULLSCREEN;
-
-	AttemptToCreateWindowAndSetIcon();
+	Uint32 flags = InitializeAndSetWindowFlags();
+	SDL_SetWindowFullscreen(window, flags);
 
 	SDL_GetWindowSize(window, &width, &height);
-	Engine::Singleton().renderer->RecreateRenderer();
 	Engine::Singleton().renderer->ResizeViewPort(width, height);
-
+	if (!TMP_SETFULLSCREEN)
+	{
+		SDL_SetWindowPosition(window, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
+	}
 }
 
 void Window::DeleteWindow()

@@ -1,7 +1,7 @@
-Package: sdl2-mixer
-Feature: wavpack
-Depends: wavpack
+Package: freetype
+Feature: zlib
+Depends: zlib
 Architecture: x64-windows
 Multi-Arch: same
-Description: Enable WavPack music.
+Description: Use zlib instead of internal library for DEFLATE
 Status: install ok installed

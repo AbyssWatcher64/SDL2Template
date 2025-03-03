@@ -141,6 +141,7 @@
     </ClCompile>
     <ClCompile Include="Source\Engine.cpp" />
     <ClCompile Include="Source\EngineFSM.cpp" />
+    <ClCompile Include="Source\IniParser.cpp" />
     <ClCompile Include="Source\Input.cpp" />
     <ClCompile Include="Source\Log.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
@@ -178,6 +179,7 @@
     <ClInclude Include="Source\Camera.hpp" />
     <ClInclude Include="Source\Engine.hpp" />
     <ClInclude Include="Source\EngineFSM.hpp" />
+    <ClInclude Include="Source\IniParser.hpp" />
     <ClInclude Include="Source\Input.hpp" />
     <ClInclude Include="Source\Log.hpp" />
     <ClInclude Include="Source\MemoryLeaksReporter.hpp" />

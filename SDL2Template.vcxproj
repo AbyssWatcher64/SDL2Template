@@ -136,6 +136,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Camera.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="Source\Engine.cpp" />
     <ClCompile Include="Source\EngineFSM.cpp" />
     <ClCompile Include="Source\Input.cpp" />
@@ -147,8 +150,15 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Source\PreCompileHeaders.cpp" />
+    <ClCompile Include="Source\Renderable.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="Source\Renderer.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Source\Scene.cpp" />
+    <ClCompile Include="Source\Textures.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Source\Timer.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
@@ -165,14 +175,19 @@
     <None Include="vcpkg.json" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Camera.hpp" />
     <ClInclude Include="Source\Engine.hpp" />
     <ClInclude Include="Source\EngineFSM.hpp" />
     <ClInclude Include="Source\Input.hpp" />
     <ClInclude Include="Source\Log.hpp" />
+    <ClInclude Include="Source\MemoryLeaksReporter.hpp" />
     <ClInclude Include="Source\Module.hpp" />
     <ClInclude Include="Source\PrecisionTimer.hpp" />
     <ClInclude Include="Source\PreCompileHeaders.h" />
+    <ClInclude Include="Source\Renderable.hpp" />
     <ClInclude Include="Source\Renderer.hpp" />
+    <ClInclude Include="Source\Scene.hpp" />
+    <ClInclude Include="Source\Textures.hpp" />
     <ClInclude Include="Source\Timer.hpp" />
     <ClInclude Include="Source\Vector2D.hpp" />
     <ClInclude Include="Source\Window.hpp" />

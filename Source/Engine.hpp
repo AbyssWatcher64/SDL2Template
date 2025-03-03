@@ -1,4 +1,6 @@
-#pragma once
+#ifndef ENGINE
+#define ENGINE
+
 #include "PreCompileHeaders.h"
 #include "EngineFSM.hpp"
 #include "PrecisionTimer.hpp"
@@ -8,6 +10,8 @@ class Module;
 // Module classes
 class Window;
 class Input;
+class Textures;
+class Scene;
 class Renderer;
 
 class Engine
@@ -70,6 +74,8 @@ public:
 	// Modules
 	std::shared_ptr<Window> window;
 	std::shared_ptr<Input> input;
+	std::shared_ptr<Textures> textures;
+	std::shared_ptr<Scene> scene;
 	std::shared_ptr<Renderer> renderer;
 
 private:
@@ -87,3 +93,5 @@ private:
 
 	bool isDebugModeActive = true;
 };
+
+#endif

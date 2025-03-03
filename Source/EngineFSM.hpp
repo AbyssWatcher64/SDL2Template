@@ -1,4 +1,6 @@
-#pragma once
+#ifndef ENGINEFSM
+#define ENGINEFSM
+
 #include "PreCompileHeaders.h"
 #include <unordered_map>
 
@@ -33,3 +35,5 @@ private:
 
     std::unordered_map<EngineState, StateFunction> stateFunctions;
 };
+
+#endif

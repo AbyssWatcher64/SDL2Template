@@ -1,4 +1,6 @@
-#pragma once
+#ifndef PRECISIONTIMER
+#define PRECISIONTIMER
+
 #include "SDL2\SDL_timer.h"
 
 class PrecisionTimer
@@ -16,3 +18,5 @@ private:
 	Uint64 startTime;
 	Uint64 frequency;
 };
+
+#endif

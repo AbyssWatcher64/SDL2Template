@@ -1,4 +1,6 @@
-#pragma once
+#ifndef INPUT
+#define INPUT
+
 #include "Module.hpp"
 
 #define NUM_MOUSE_BUTTONS 5
@@ -46,7 +48,6 @@ public:
     void HandleWindowEvent(Uint8 windowEvent);
     void UpdateMouseMotion(const SDL_MouseMotionEvent& motion);
 
-
     Vector2D GetMousePosition() const;
     Vector2D GetMouseMotion() const;
 
@@ -60,3 +61,5 @@ private:
     int mouseX = 0;
     int mouseY = 0;
 };
+
+#endif

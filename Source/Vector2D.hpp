@@ -1,4 +1,5 @@
-#pragma once
+#ifndef VECTOR2D
+#define VECTOR2D
 
 class Vector2D
 {
@@ -33,3 +34,5 @@ private:
 	int x;
 	int y;
 };
+
+#endif

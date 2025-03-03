@@ -22,6 +22,9 @@
     <Filter Include="Source Files\Utils">
       <UniqueIdentifier>{a473c5ee-08b9-422d-82ed-4277d9927518}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Game">
+      <UniqueIdentifier>{e6c6f884-a969-4d65-abc5-ff065d1f8dd0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Engine.cpp">
@@ -55,6 +58,18 @@
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
     <ClCompile Include="Source\Renderer.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Renderable.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Camera.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Textures.cpp">
       <Filter>Source Files\Engine</Filter>
     </ClCompile>
   </ItemGroup>
@@ -98,6 +113,21 @@
       <Filter>Source Files\Utils</Filter>
     </ClInclude>
     <ClInclude Include="Source\Renderer.hpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene.hpp">
+      <Filter>Source Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Renderable.hpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MemoryLeaksReporter.hpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Camera.hpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Textures.hpp">
       <Filter>Source Files\Engine</Filter>
     </ClInclude>
   </ItemGroup>

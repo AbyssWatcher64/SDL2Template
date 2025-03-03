@@ -28,21 +28,21 @@ public:
 	Uint32 InitializeAndSetWindowFlags();
 	WindowFlagBools InitializeWindowFlags();
 	Uint32 SetFlagsForWindow(WindowFlagBools flagBools);
-	void InitializeWindowSizeAndScale();
+	void InitializeWindowSize();
 	bool AttemptToCreateWindow(const std::string& windowName, Uint32 flags);
 	bool AttemptToSetWindowIcon(const std::string& path);
 
 
 	// Change title
 	//void SetTitle(const char* title);
+	void ChangeResolution(int newWidth, int newHeight);
+	void ToggleFullScreen();
+	void DeleteWindow();
 
 	// TODO, maybe - Retrive window size
 	//Vector2D GetWindowSize() const;
 	int GetWindowWidth() const;
 	int GetWindowHeight() const;
-
-	// Retrieve window scale
-	int GetScale() const;
 
 	// Getter of the window
 	SDL_Window* GetWindow() const;
@@ -50,9 +50,11 @@ public:
 private:
 	SDL_Window* window;
 
-	std::string title;
+	std::string gameTitle;
+	std::string engineIconPath;
+	bool isFullScreen = false;
 	int width;
 	int height;
-	int scale;
 
+	bool TMP_SETFULLSCREEN = false;
 };

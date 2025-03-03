@@ -14,4 +14,4 @@
 #include "Log.hpp"
 #include "Vector2D.hpp"
 
-#endif // PCH_H
+#endif

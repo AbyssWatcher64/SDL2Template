@@ -1,4 +1,5 @@
-#pragma once
+#ifndef MODULE
+#define MODULE
 #include "PreCompileHeaders.h"
 
 class Module
@@ -64,3 +65,5 @@ public:
 
 	// TODO: Maybe add configParameters from the xml_node?
 };
+
+#endif

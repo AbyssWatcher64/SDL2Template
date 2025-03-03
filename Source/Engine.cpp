@@ -3,6 +3,8 @@
 // Module includes
 #include "Window.hpp"
 #include "Input.hpp"
+#include "Textures.hpp"
+#include "Scene.hpp"
 #include "Renderer.hpp"
 
 
@@ -14,6 +16,8 @@ Engine::Engine()
 	// TODO: Include all modules
 	window = std::make_shared<Window>();		AddModule(window);
 	input = std::make_shared<Input>();			AddModule(input);
+	textures = std::make_shared<Textures>();	AddModule(textures);
+	scene = std::make_shared<Scene>();			AddModule(scene);
 	renderer = std::make_shared<Renderer>();	AddModule(renderer);
 }
 

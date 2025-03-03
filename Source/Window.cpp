@@ -1,11 +1,15 @@
 //#include "PreCompileHeaders.h"
 #include "Window.hpp"
 #include "Module.hpp"
+#include "Renderer.hpp"
+#include "Textures.hpp"
 
 Window::Window() : Module()
 {
 	window = nullptr;
 	name = "window";
+	gameTitle = "SDL Engine Template";
+	engineIconPath = "./Assets/UI/Misc/EngineIcon.png";
 }
 
 Window::~Window()
@@ -25,6 +29,7 @@ bool Window::Awake()
 	}
 	else
 	{
+		InitializeWindowSize();
 		ret = AttemptToCreateWindowAndSetIcon();
 	}
 
@@ -40,11 +45,7 @@ bool Window::CleanUp()
 	SDL_Quit();
 
 	// Destroy window
-	if (window != nullptr)
-	{
-		SDL_DestroyWindow(window);
-		window = nullptr;
-	}
+	DeleteWindow();
 
 	return true;
 }
@@ -61,11 +62,7 @@ bool Window::AttemptToCreateWindowAndSetIcon()
 {
 	bool ret = true;
 
-	std::string gameTitle = "SDL Engine Template";
-	std::string engineIconPath = "./Assets/UI/Misc/EngineIcon.png";
-
 	Uint32 flags = InitializeAndSetWindowFlags();
-	InitializeWindowSizeAndScale();
 
 	// ret becomes true only if both are true
 	ret = AttemptToCreateWindow(gameTitle, flags) && AttemptToSetWindowIcon(engineIconPath); 
@@ -88,7 +85,15 @@ WindowFlagBools Window::InitializeWindowFlags()
 	//flagBools.fullscreenWindow = false;
 	//return flagBools;
 
-	return WindowFlagBools{}; // Automatically initializes all fields to false
+	// Grab flags from ConfigXML file
+	WindowFlagBools flagBools{};
+	if (TMP_SETFULLSCREEN)
+	{
+		flagBools.fullscreen = true;
+	}
+
+	return flagBools;
+	//return WindowFlagBools{}; // Automatically initializes all fields to false
 }
 
 Uint32 Window::SetFlagsForWindow(WindowFlagBools flagBools)
@@ -101,18 +106,17 @@ Uint32 Window::SetFlagsForWindow(WindowFlagBools flagBools)
 	return flags;
 }
 
-void Window::InitializeWindowSizeAndScale()
+void Window::InitializeWindowSize()
 {
 	// TODO Get the values from the config file
 	width = 352;
 	height = 224;
-	scale = 1;
 }
 
 bool Window::AttemptToCreateWindow(const std::string& windowName, Uint32 flags)
 {
 	bool ret = true;
-	window = SDL_CreateWindow(windowName.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width * scale, height * scale, flags);
+	window = SDL_CreateWindow(windowName.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, flags);
 	if (window == nullptr)
 	{
 		LOG("Window could not be created! SDL_Error: %s\n", SDL_GetError());
@@ -143,6 +147,45 @@ bool Window::AttemptToSetWindowIcon(const std::string& path)
 //{
 //	return Vector2D(width, height);
 //}
+void Window::ChangeResolution(int newWidth, int newHeight)
+{
+	width = newWidth;
+	height = newHeight;
+
+	LOG("EVENT: Deleting current window and changing resolution to: %d x %d", width, height);
+	//SDL_SetWindowSize(window, width, height);
+	DeleteWindow();
+
+	AttemptToCreateWindowAndSetIcon();
+
+	Engine::Singleton().renderer->RecreateRenderer();
+	Engine::Singleton().renderer->ResizeViewPort(width, height);
+	//Engine::Singleton().textures->ReloadTextures();
+}
+
+void Window::ToggleFullScreen()
+{
+	LOG("EVENT: Deleting current window and changing resolution to: %d x %d", width, height);
+	DeleteWindow();
+
+	TMP_SETFULLSCREEN = !TMP_SETFULLSCREEN;
+
+	AttemptToCreateWindowAndSetIcon();
+
+	SDL_GetWindowSize(window, &width, &height);
+	Engine::Singleton().renderer->RecreateRenderer();
+	Engine::Singleton().renderer->ResizeViewPort(width, height);
+
+}
+
+void Window::DeleteWindow()
+{
+	if (window != nullptr)
+	{
+		SDL_DestroyWindow(window);
+		window = nullptr;
+	}
+}
 
 int Window::GetWindowWidth() const  
 {
@@ -152,11 +195,6 @@ int Window::GetWindowWidth() const
 int Window::GetWindowHeight() const
 {
 	return height;
-}
-
-int Window::GetScale() const
-{
-	return scale;
 }
 
 SDL_Window* Window::GetWindow() const

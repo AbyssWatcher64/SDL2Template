@@ -1,59 +1,38 @@
-//#include "PreCompileHeaders.h"
 #include "Renderer.hpp"
+#include "Renderable.hpp"
 #include "Window.hpp"
+#include "Camera.hpp"
 
-// Constructor
 Renderer::Renderer()
 {
 	renderer = nullptr;
 	name = "renderer";
 
-	// Set background to transparent
-	// TODO: Revise if necessary.
-	background.r = 0; background.g = 0; background.b = 0; background.a = 0;
+	// Create camera
+	camera = std::make_shared<Camera>();
 }
 
-// Destructor
-Renderer::~Renderer()
-{
+Renderer::~Renderer() {}
 
-}
 
-// Module Functions
 bool Renderer::Awake()
 {
-	// TODO: Get this better.
 	LOG("== Initializing Renderer ==");
 	bool ret = true;
 
 	Uint32 flags = SDL_RENDERER_ACCELERATED;
 
-	//L05 TODO 5 - Load the configuration of the Renderer module
-	//if (configParameters.child("vsync").attribute("value").as_bool() == true) {
-	//	flags |= SDL_RENDERER_PRESENTVSYNC;
-	//	LOG("Using vsync");
-	//}
+	// TODO: Change this to use player configuration settings
 	// Forcing VSync for the time being.
 	flags |= SDL_RENDERER_PRESENTVSYNC;
 	LOG("Using vsync");
 
-	int scale = Engine::Singleton().window.get()->GetScale();
+	renderer = SDL_CreateRenderer(Engine::Singleton().window->GetWindow(), -1, flags);
 
-	SDL_Window* window = Engine::Singleton().window->GetWindow();
-	renderer = SDL_CreateRenderer(window, -1, flags);
-
-	if (renderer == NULL)
+	if (renderer == nullptr)
 	{
 		LOG("Could not create the renderer! SDL_Error: %s\n", SDL_GetError());
 		ret = false;
-	}
-	else
-	{
-		//// Nothing seems to change this
-		//camera.w = Engine::GetInstance().window.get()->width * scale;
-		//camera.h = Engine::GetInstance().window.get()->height * scale;
-		//camera.x = 0;
-		//camera.y = 0;
 	}
 
 	return ret;
@@ -62,10 +41,11 @@ bool Renderer::Awake()
 bool Renderer::Start()
 {
 	LOG("== Starting Renderer ==");
-	// back background
-	/*timer = new Timer();
-	timer->Start();*/
+	// Sets background
+	background.r = 0; background.g = 0; background.b = 0; background.a = 0;
+
 	SDL_RenderGetViewport(renderer, &viewport);
+
 	return true;
 }
 
@@ -77,12 +57,47 @@ bool Renderer::PreUpdate()
 
 bool Renderer::Update(float dt)
 {
+	camera->Update();
 	return true;
 }
 
 bool Renderer::PostUpdate()
 {
-	SDL_SetRenderDrawColor(renderer, background.r, background.g, background.g, background.a);
+	SDL_SetRenderDrawColor(renderer, background.r, background.g, background.b, background.a);
+	SDL_RenderClear(renderer);
+
+	std::vector<std::unique_ptr<Renderable>>* layers[LAYER_TOTALCOUNT] = {
+		&backgroundLayer, &worldLayer, &entityLayer, &overEntityLayer, &debugLayer, &uiLayer
+	};
+
+	int i = 0;
+	for (auto* layer : layers)  // Iterate through layer pointers
+	{
+		for (const auto& r : *layer)  // Dereference the pointer to access the vector
+		{
+			switch (r->type)
+			{
+			case Renderable::RenderType::TEXTURE:
+				DrawTexture(r->texture, r->rect, r->forceDrawInsideCamera, r->layer, r->angle, r->pivot.x, r->pivot.y);
+				break;
+
+			case Renderable::RenderType::RECTANGLE:
+				DrawRectangle(r->rect, r->color, r->forceDrawInsideCamera, r->filled);
+				break;
+
+			case Renderable::RenderType::LINE:
+				DrawLine(r->point1, r->point2, r->color, r->forceDrawInsideCamera);
+				break;
+
+			case Renderable::RenderType::CIRCLE:
+				DrawCircle(r->point1, r->radius, r->color, r->forceDrawInsideCamera);
+				break;
+			}
+		}
+		layer->clear();  // Use `layer->clear()` since it's now a pointer to a vector
+	}
+
+
 	SDL_RenderPresent(renderer);
 	return true;
 }
@@ -90,193 +105,268 @@ bool Renderer::PostUpdate()
 bool Renderer::CleanUp()
 {
 	LOG("== Destroying SDL renderer ==");
-	SDL_DestroyRenderer(renderer);
+	if (renderer != nullptr)
+	{
+		SDL_DestroyRenderer(renderer);
+		renderer = nullptr;
+	}
+
 	return true;
 }
 
-// Viewports
+void Renderer::RecreateRenderer()
+{
+	LOG("Recreating Renderer due to resolution change");
+
+	if (renderer != nullptr)
+	{
+		SDL_DestroyRenderer(renderer);
+	}
+
+	Uint32 flags = SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC;
+
+	renderer = SDL_CreateRenderer(Engine::Singleton().window->GetWindow(), -1, flags);
+
+	if (renderer == nullptr)
+	{
+		LOG("Could not recreate renderer! SDL_Error: %s", SDL_GetError());
+	}
+}
+
 void Renderer::SetViewPort(const SDL_Rect& rect)
 {
 	SDL_RenderSetViewport(renderer, &rect);
 }
 
-// MEGATEMP - TODO: Fix this.
 bool Renderer::ResizeViewPort(int screenWidth, int screenHeight)
 {
-    int cameraWidth = camera.w;
-    int cameraHeight = camera.h;
+	SetNewScreenWidthAndHeight(screenWidth, screenHeight);
 
-    // Get screen and camera aspect ratios
-    float screenAspect = static_cast<float>(screenWidth) / static_cast<float>(screenHeight);
-    float cameraAspect = static_cast<float>(cameraWidth) / static_cast<float>(cameraHeight);
+	float screenAspect = static_cast<float>(newScreenWidth) / newScreenHeight;
 
-    // Determine new viewport size based on aspect ratios
-    SDL_Rect newViewport;
+	SDL_Rect newViewport;
 
-    if (screenAspect > cameraAspect) {
-        // Letterbox scenario: We scale based on height
-        newViewport.h = screenHeight;
-        newViewport.w = static_cast<int>(screenHeight * cameraAspect);
-        newViewport.x = (screenWidth - newViewport.w) / 2;  // Center horizontally
-        newViewport.y = 0;
-    }
-    else {
-        // Pillarbox scenario: We scale based on width
-        newViewport.w = screenWidth;
-        newViewport.h = static_cast<int>(screenWidth / cameraAspect);
-        newViewport.x = 0;
-        newViewport.y = (screenHeight - newViewport.h) / 2;  // Center vertically
-    }
+	UseLetterBoxOrPillarBox(newViewport, screenAspect);
 
-    // Set the new viewport
-    SDL_RenderSetViewport(renderer, &newViewport);
+	// Apply new viewport
+	SDL_RenderSetViewport(renderer, &newViewport);
 
-    // Update the camera's scaling factor based on the new resolution
-    camera.x = newViewport.x;
-    camera.y = newViewport.y;
-    camera.w = newViewport.w;
-    camera.h = newViewport.h;
+	// Set logical size for automatic scaling
+	SDL_RenderSetLogicalSize(renderer, baseWidth, baseHeight);
 
-    return true;
+	LOG("Updated viewport to: %d x %d", newScreenWidth, newScreenHeight);
+	return true;
 }
+
+void Renderer::SetNewScreenWidthAndHeight(int screenWidth, int screenHeight)
+{
+	newScreenWidth = screenWidth;
+	newScreenHeight = screenHeight;
+}
+
+void Renderer::UseLetterBoxOrPillarBox(SDL_Rect& newViewport, const float screenAspect)
+{
+	if (screenAspect > baseAspectRatio)
+	{
+		UseLetterBox(newViewport);
+	}
+	else
+	{
+		UsePillarBox(newViewport);
+	}
+}
+
+// Letterbox means black bars on left and right
+void Renderer::UseLetterBox(SDL_Rect& newViewport)
+{
+	newViewport.h = newScreenHeight;
+	newViewport.w = static_cast<int>(newScreenHeight * baseAspectRatio);
+	newViewport.x = (newScreenWidth - newViewport.w) / 2;
+	newViewport.y = 0;
+}
+
+// Pillarbox means black bars on top and bottom
+void Renderer::UsePillarBox(SDL_Rect& newViewport)
+{
+	newViewport.w = newScreenWidth;
+	newViewport.h = static_cast<int>(newScreenWidth / baseAspectRatio);
+	newViewport.x = 0;
+	newViewport.y = (newScreenHeight - newViewport.h) / 2;
+}
+
 
 void Renderer::ResetViewPort()
 {
 	SDL_RenderSetViewport(renderer, &viewport);
 }
 
-bool Renderer::DrawTexture(SDL_Texture* texture, Vector2D vector, const SDL_Rect* section, bool useCamera, float speed, double angle, int pivotX, int pivotY) const
+Vector2D Renderer::SetOffset(bool forceDrawInsideCamera)
 {
-	bool ret = true;
-	int scale = Engine::Singleton().window.get()->GetScale();
-
-	SDL_Rect rect;
-	rect.x = (int)(camera.x * speed) + vector.GetX() * scale;
-	rect.y = (int)(camera.y * speed) + vector.GetY() * scale;
-
-	if (section != NULL)
+	Vector2D offset = Vector2D();
+	if (forceDrawInsideCamera)
 	{
-		rect.w = section->w;
-		rect.h = section->h;
+		offset.SetX(0);
+		offset.SetY(0);
 	}
 	else
 	{
-		SDL_QueryTexture(texture, NULL, NULL, &rect.w, &rect.h);
+		offset.SetX(-camera->GetCameraXPosition());
+		offset.SetY(-camera->GetCameraYPosition());
+		//offsetX = -camera->GetCameraXPosition();
+		//offsetY = -camera->GetCameraYPosition();
 	}
+	return offset;
+}
 
-
-	if (!useCamera)
+bool Renderer::QueueTexture(SDL_Texture* texture, SDL_Rect& section, bool forceDrawInsideCamera, int layer, double angle, int pivotX, int pivotY)
+{
+	// TODO: EDIT THIS TO WORK with the new structure
+	bool ret = true;
+	if (!texture)
 	{
-		rect.x = (int)(vector.GetX() * scale);
-		rect.y = (int)(vector.GetY() * scale);
-	}
-
-	rect.w *= scale;
-	rect.h *= scale;
-
-
-	SDL_Point* p = NULL;
-	SDL_Point pivot;
-
-	if (pivotX != INT_MAX && pivotY != INT_MAX)
-	{
-		pivot.x = pivotX;
-		pivot.y = pivotY;
-		p = &pivot;
-	}
-
-	if (SDL_RenderCopyEx(renderer, texture, section, &rect, angle, p, SDL_FLIP_NONE) != 0)
-	{
-		LOG("Cannot blit to screen. SDL_RenderCopy error: %s", SDL_GetError());
+		LOG("ERROR: QueueTexture received a nullptr texture.");
 		ret = false;
 	}
+
+	std::unique_ptr<Renderable> renderable = std::make_unique<Renderable>(texture, section, forceDrawInsideCamera, layer, angle, pivotX, pivotY);
+	AddRenderableToAppropriateLayer(std::move(renderable));
 
 	return ret;
 }
 
-//bool Renderer::DrawTextureDifferentScale(SDL_Texture* texture, Vector2D vector, const SDL_Rect* section = NULL, int scaleFactor = 3, bool useCamera = true, float speed = 1.0f, double angle = 0, int pivotX = INT_MAX, int pivotY = INT_MAX) const
-//{
-//
-//}
-
-bool Renderer::DrawRectangle(const SDL_Rect& rect, SDL_Color rgb, bool filled, bool useCamera) const
+bool Renderer::QueueDebugRectangle(const SDL_Rect& rect, SDL_Color color, bool filled, bool forceDrawInsideCamera, int layer)
 {
-	bool ret = true;
-	int scale = Engine::Singleton().window.get()->GetScale();
+	std::unique_ptr<Renderable> renderable = std::make_unique<Renderable>(rect, color, filled, forceDrawInsideCamera, layer);
+	AddRenderableToAppropriateLayer(std::move(renderable));
 
-	SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
-	SDL_SetRenderDrawColor(renderer, rgb.r, rgb.g, rgb.b, rgb.a);
-
-	SDL_Rect rec(rect);
-	if (useCamera)
-	{
-		rec.x = (int)(camera.x + rect.x * scale);
-		rec.y = (int)(camera.y + rect.y * scale);
-		rec.w *= scale;
-		rec.h *= scale;
-	}
-
-	int result = (filled) ? SDL_RenderFillRect(renderer, &rec) : SDL_RenderDrawRect(renderer, &rec);
-
-	if (result != 0)
-	{
-		LOG("Cannot draw quad to screen. SDL_RenderFillRect error: %s", SDL_GetError());
-		ret = false;
-	}
-
-	return ret;
+	return true;
 }
 
-bool Renderer::DrawLine(Vector2D vector1, Vector2D vector2, SDL_Color rgb, bool useCamera) const
+
+bool Renderer::QueueDebugLine(Vector2D start, Vector2D end, SDL_Color color, bool forceDrawInsideCamera, int layer)
 {
-	bool ret = true;
-	int scale = Engine::Singleton().window.get()->GetScale();
+	std::unique_ptr<Renderable> renderable = std::make_unique<Renderable>(start, end, color, forceDrawInsideCamera, layer);
+	AddRenderableToAppropriateLayer(std::move(renderable));
 
-	SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
-	SDL_SetRenderDrawColor(renderer, rgb.r, rgb.g, rgb.b, rgb.a);
+	return true;
+}
 
-	int result = -1;
+bool Renderer::QueueDebugCircle(Vector2D center, int radius, SDL_Color color, bool forceDrawInsideCamera, int layer)
+{
+	std::unique_ptr<Renderable> renderable = std::make_unique<Renderable>(center, radius, color, forceDrawInsideCamera, layer);
+	AddRenderableToAppropriateLayer(std::move(renderable));
 
-	if (useCamera)
-		result = SDL_RenderDrawLine(renderer, camera.x + vector1.GetX() * scale, camera.y + vector1.GetY() * scale, camera.x + vector2.GetX() * scale, camera.y + vector2.GetY() * scale);
+	return true;
+}
+
+void Renderer::AddRenderableToAppropriateLayer(std::unique_ptr<Renderable> renderable)
+{
+	switch (renderable->layer)
+	{
+	default:
+		LOG("ERROR: Renderable's layer's number is wrong. The number is %d.", renderable->layer);
+		LOG("The Renderable layer number should be between 0 and %d.", (Renderer::Layer::LAYER_TOTALCOUNT - 1));
+		break;
+	case Renderer::BACKGROUND:
+		backgroundLayer.emplace_back(std::move(renderable));
+		break;
+	case Renderer::WORLD:
+		worldLayer.emplace_back(std::move(renderable));
+		break;
+	case Renderer::ENTITY:
+		entityLayer.emplace_back(std::move(renderable));
+		break;
+	case Renderer::OVERENTITY:
+		overEntityLayer.emplace_back(std::move(renderable));
+		break;
+	case Renderer::DEBUG:
+		debugLayer.emplace_back(std::move(renderable));
+		break;
+	case Renderer::UI:
+		uiLayer.emplace_back(std::move(renderable));
+		break;
+	}
+}
+
+void Renderer::DrawTexture(SDL_Texture* texture, SDL_Rect& srcRect, bool forceDrawInsideCamera, int layer, double angle, int pivotX, int pivotY)
+{
+	if (!texture)
+	{
+		LOG("ERROR: DrawTexture received a nullptr texture.");
+		return;
+	}
+
+	//SDL_Rect dstRect = srcRect; // Destination rectangle (could be modified if necessary)
+	Vector2D offset = SetOffset(forceDrawInsideCamera);
+	SDL_Rect dstRect = { 180+offset.GetX(), 50+offset.GetY(), srcRect.w, srcRect.h}; // Destination rectangle (could be modified if necessary)
+
+	SDL_Point pivot = { pivotX, pivotY };
+
+	if (SDL_RenderCopyEx(renderer, texture, &srcRect, &dstRect, angle, &pivot, SDL_FLIP_NONE) != 0)
+	{
+		LOG("SDL_RenderCopyEx failed: %s", SDL_GetError());
+	}
+	//SDL_RenderCopyEx(renderer, texture, &srcRect, &dstRect, angle, nullptr/*&pivot*/, SDL_FLIP_NONE);
+}
+
+void Renderer::DrawRectangle(SDL_Rect& rectangle, SDL_Color color, bool forceDrawInsideCamera, bool filled)
+{
+	SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
+
+	Vector2D offset = SetOffset(forceDrawInsideCamera);
+	SDL_Rect renderingRectangle({ rectangle.x + offset.GetX(), rectangle.y + offset.GetY(), rectangle.w, rectangle.h });
+
+	if (filled)
+	{
+		SDL_RenderFillRect(renderer, &renderingRectangle);
+	}
 	else
-		result = SDL_RenderDrawLine(renderer, vector1.GetX() * scale, vector1.GetY() * scale, vector2.GetX() * scale, vector2.GetY() * scale);
-
-	if (result != 0)
 	{
-		LOG("Cannot draw quad to screen. SDL_RenderFillRect error: %s", SDL_GetError());
-		ret = false;
-	}
 
-	return ret;
+		SDL_RenderDrawRect(renderer, &renderingRectangle);
+	}
 }
 
-bool Renderer::DrawCircle(Vector2D vector, int radius, SDL_Color rgb, bool useCamera) const
+void Renderer::DrawLine(Vector2D originVector, Vector2D endVector, SDL_Color color, bool forceDrawInsideCamera)
 {
-	bool ret = true;
-	int scale = Engine::Singleton().window.get()->GetScale();
+	SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
+	Vector2D offset = SetOffset(forceDrawInsideCamera);
+	SDL_RenderDrawLine(renderer, originVector.GetX() + offset.GetX(), originVector.GetY() + offset.GetY(), 
+									endVector.GetX() + offset.GetX(), endVector.GetY()	  + offset.GetY());
+}
 
+bool Renderer::DrawCircle(Vector2D vector, int radius, SDL_Color rgb, bool forceDrawInsideCamera)
+{
 	SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
 	SDL_SetRenderDrawColor(renderer, rgb.r, rgb.g, rgb.b, rgb.a);
 
-	int result = -1;
+	DrawCircleInternal(vector, radius, forceDrawInsideCamera);  // Call internal function
+	return true;
+}
+
+void Renderer::DrawCircleInternal(Vector2D vector, int radius, bool forceDrawInsideCamera) 
+{
 	SDL_Point points[360];
-
 	float factor = (float)M_PI / 180.0f;
+
+	Vector2D offset = SetOffset(forceDrawInsideCamera);
 
 	for (int i = 0; i < 360; ++i)
 	{
-		points[i].x = (int)(vector.GetX() * scale + camera.x) + (int)(radius * cos(i * factor));
-		points[i].y = (int)(vector.GetY() * scale + camera.y) + (int)(radius * sin(i * factor));
+
+		points[i].x = (int)(vector.GetX() + offset.GetX() + (int)(radius * cos(i * factor)));
+		points[i].y = (int)(vector.GetY() + offset.GetY() + (int)(radius * sin(i * factor)));
 	}
 
-	result = SDL_RenderDrawPoints(renderer, points, 360);
+	SDL_RenderDrawPoints(renderer, points, 360);
+}
 
-	if (result != 0)
-	{
-		LOG("Cannot draw quad to screen. SDL_RenderFillRect error: %s", SDL_GetError());
-		ret = false;
-	}
+SDL_Renderer* Renderer::GetRenderer() const
+{
+	return renderer;
+}
 
-	return ret;
+std::shared_ptr<Camera> Renderer::GetCamera()
+{
+	return camera;
 }

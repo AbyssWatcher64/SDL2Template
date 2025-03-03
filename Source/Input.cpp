@@ -56,6 +56,14 @@ bool Input::PreUpdate()
     return true;
 }
 
+// Called before quitting
+bool Input::CleanUp()
+{
+    LOG("== Quitting SDL event subsystem ==");
+    SDL_QuitSubSystem(SDL_INIT_EVENTS);
+    return true;
+}
+
 KeyState Input::GetKey(int id) const 
 {
     return keyboard[id];
@@ -181,19 +189,10 @@ void Input::HandleWindowEvent(Uint8 windowEvent)
 
 void Input::UpdateMouseMotion(const SDL_MouseMotionEvent& motion)
 {
-    int scale = Engine::Singleton().window->GetScale();
     mouseMotionX = motion.xrel /* / scale */;
     mouseMotionY = motion.yrel /* / scale */;
     mouseX = motion.x /* / scale */;
     mouseY = motion.y /* / scale */;
-}
-
-// Called before quitting
-bool Input::CleanUp()
-{
-    LOG("== Quitting SDL event subsystem ==");
-    SDL_QuitSubSystem(SDL_INIT_EVENTS);
-    return true;
 }
 
 Vector2D Input::GetMousePosition() const

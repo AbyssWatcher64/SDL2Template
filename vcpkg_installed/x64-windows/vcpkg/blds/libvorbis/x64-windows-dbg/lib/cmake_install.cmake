@@ -1,8 +1,8 @@
-# Install script for directory: C:/Users/Pol/source/repos/SDL2Template/vcpkg_installed/x64-windows/vcpkg/blds/libvorbis/src/v1.3.7-c32164610e.clean/lib
+# Install script for directory: C:/Users/polss/Documents/GitHub/SDL2Template/vcpkg_installed/x64-windows/vcpkg/blds/libvorbis/src/v1.3.7-c32164610e.clean/lib
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "C:/Users/Pol/source/repos/SDL2Template/vcpkg_installed/x64-windows/vcpkg/pkgs/libvorbis_x64-windows/debug")
+  set(CMAKE_INSTALL_PREFIX "C:/Users/polss/Documents/GitHub/SDL2Template/vcpkg_installed/x64-windows/vcpkg/pkgs/libvorbis_x64-windows/debug")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -34,49 +34,49 @@ endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "C:/Users/Pol/source/repos/SDL2Template/vcpkg_installed/x64-windows/vcpkg/pkgs/libvorbis_x64-windows/debug/include/vorbis/codec.h;C:/Users/Pol/source/repos/SDL2Template/vcpkg_installed/x64-windows/vcpkg/pkgs/libvorbis_x64-windows/debug/include/vorbis/vorbisenc.h;C:/Users/Pol/source/repos/SDL2Template/vcpkg_installed/x64-windows/vcpkg/pkgs/libvorbis_x64-windows/debug/include/vorbis/vorbisfile.h")
+   "C:/Users/polss/Documents/GitHub/SDL2Template/vcpkg_installed/x64-windows/vcpkg/pkgs/libvorbis_x64-windows/debug/include/vorbis/codec.h;C:/Users/polss/Documents/GitHub/SDL2Template/vcpkg_installed/x64-windows/vcpkg/pkgs/libvorbis_x64-windows/debug/include/vorbis/vorbisenc.h;C:/Users/polss/Documents/GitHub/SDL2Template/vcpkg_installed/x64-windows/vcpkg/pkgs/libvorbis_x64-windows/debug/include/vorbis/vorbisfile.h")
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-  file(INSTALL DESTINATION "C:/Users/Pol/source/repos/SDL2Template/vcpkg_installed/x64-windows/vcpkg/pkgs/libvorbis_x64-windows/debug/include/vorbis" TYPE FILE FILES
-    "C:/Users/Pol/source/repos/SDL2Template/vcpkg_installed/x64-windows/vcpkg/blds/libvorbis/src/v1.3.7-c32164610e.clean/lib/../include/vorbis/codec.h"
-    "C:/Users/Pol/source/repos/SDL2Template/vcpkg_installed/x64-windows/vcpkg/blds/libvorbis/src/v1.3.7-c32164610e.clean/lib/../include/vorbis/vorbisenc.h"
-    "C:/Users/Pol/source/repos/SDL2Template/vcpkg_installed/x64-windows/vcpkg/blds/libvorbis/src/v1.3.7-c32164610e.clean/lib/../include/vorbis/vorbisfile.h"
+  file(INSTALL DESTINATION "C:/Users/polss/Documents/GitHub/SDL2Template/vcpkg_installed/x64-windows/vcpkg/pkgs/libvorbis_x64-windows/debug/include/vorbis" TYPE FILE FILES
+    "C:/Users/polss/Documents/GitHub/SDL2Template/vcpkg_installed/x64-windows/vcpkg/blds/libvorbis/src/v1.3.7-c32164610e.clean/lib/../include/vorbis/codec.h"
+    "C:/Users/polss/Documents/GitHub/SDL2Template/vcpkg_installed/x64-windows/vcpkg/blds/libvorbis/src/v1.3.7-c32164610e.clean/lib/../include/vorbis/vorbisenc.h"
+    "C:/Users/polss/Documents/GitHub/SDL2Template/vcpkg_installed/x64-windows/vcpkg/blds/libvorbis/src/v1.3.7-c32164610e.clean/lib/../include/vorbis/vorbisfile.h"
     )
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY OPTIONAL FILES "C:/Users/Pol/source/repos/SDL2Template/vcpkg_installed/x64-windows/vcpkg/blds/libvorbis/x64-windows-dbg/lib/vorbis.lib")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY OPTIONAL FILES "C:/Users/polss/Documents/GitHub/SDL2Template/vcpkg_installed/x64-windows/vcpkg/blds/libvorbis/x64-windows-dbg/lib/vorbis.lib")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" TYPE SHARED_LIBRARY FILES "C:/Users/Pol/source/repos/SDL2Template/vcpkg_installed/x64-windows/vcpkg/blds/libvorbis/x64-windows-dbg/lib/vorbis.dll")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" TYPE SHARED_LIBRARY FILES "C:/Users/polss/Documents/GitHub/SDL2Template/vcpkg_installed/x64-windows/vcpkg/blds/libvorbis/x64-windows-dbg/lib/vorbis.dll")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY OPTIONAL FILES "C:/Users/Pol/source/repos/SDL2Template/vcpkg_installed/x64-windows/vcpkg/blds/libvorbis/x64-windows-dbg/lib/vorbisenc.lib")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY OPTIONAL FILES "C:/Users/polss/Documents/GitHub/SDL2Template/vcpkg_installed/x64-windows/vcpkg/blds/libvorbis/x64-windows-dbg/lib/vorbisenc.lib")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" TYPE SHARED_LIBRARY FILES "C:/Users/Pol/source/repos/SDL2Template/vcpkg_installed/x64-windows/vcpkg/blds/libvorbis/x64-windows-dbg/lib/vorbisenc.dll")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" TYPE SHARED_LIBRARY FILES "C:/Users/polss/Documents/GitHub/SDL2Template/vcpkg_installed/x64-windows/vcpkg/blds/libvorbis/x64-windows-dbg/lib/vorbisenc.dll")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY OPTIONAL FILES "C:/Users/Pol/source/repos/SDL2Template/vcpkg_installed/x64-windows/vcpkg/blds/libvorbis/x64-windows-dbg/lib/vorbisfile.lib")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY OPTIONAL FILES "C:/Users/polss/Documents/GitHub/SDL2Template/vcpkg_installed/x64-windows/vcpkg/blds/libvorbis/x64-windows-dbg/lib/vorbisfile.lib")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" TYPE SHARED_LIBRARY FILES "C:/Users/Pol/source/repos/SDL2Template/vcpkg_installed/x64-windows/vcpkg/blds/libvorbis/x64-windows-dbg/lib/vorbisfile.dll")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" TYPE SHARED_LIBRARY FILES "C:/Users/polss/Documents/GitHub/SDL2Template/vcpkg_installed/x64-windows/vcpkg/blds/libvorbis/x64-windows-dbg/lib/vorbisfile.dll")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
   if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/cmake/Vorbis/VorbisTargets.cmake")
     file(DIFFERENT _cmake_export_file_changed FILES
          "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/cmake/Vorbis/VorbisTargets.cmake"
-         "C:/Users/Pol/source/repos/SDL2Template/vcpkg_installed/x64-windows/vcpkg/blds/libvorbis/x64-windows-dbg/lib/CMakeFiles/Export/cc38caa321284793c52f43683a3b76fc/VorbisTargets.cmake")
+         "C:/Users/polss/Documents/GitHub/SDL2Template/vcpkg_installed/x64-windows/vcpkg/blds/libvorbis/x64-windows-dbg/lib/CMakeFiles/Export/cc38caa321284793c52f43683a3b76fc/VorbisTargets.cmake")
     if(_cmake_export_file_changed)
       file(GLOB _cmake_old_config_files "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/cmake/Vorbis/VorbisTargets-*.cmake")
       if(_cmake_old_config_files)
@@ -89,16 +89,16 @@ if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT
     endif()
     unset(_cmake_export_file_changed)
   endif()
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/Vorbis" TYPE FILE FILES "C:/Users/Pol/source/repos/SDL2Template/vcpkg_installed/x64-windows/vcpkg/blds/libvorbis/x64-windows-dbg/lib/CMakeFiles/Export/cc38caa321284793c52f43683a3b76fc/VorbisTargets.cmake")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/Vorbis" TYPE FILE FILES "C:/Users/polss/Documents/GitHub/SDL2Template/vcpkg_installed/x64-windows/vcpkg/blds/libvorbis/x64-windows-dbg/lib/CMakeFiles/Export/cc38caa321284793c52f43683a3b76fc/VorbisTargets.cmake")
   if(CMAKE_INSTALL_CONFIG_NAME MATCHES "^([Dd][Ee][Bb][Uu][Gg])$")
-    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/Vorbis" TYPE FILE FILES "C:/Users/Pol/source/repos/SDL2Template/vcpkg_installed/x64-windows/vcpkg/blds/libvorbis/x64-windows-dbg/lib/CMakeFiles/Export/cc38caa321284793c52f43683a3b76fc/VorbisTargets-debug.cmake")
+    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/Vorbis" TYPE FILE FILES "C:/Users/polss/Documents/GitHub/SDL2Template/vcpkg_installed/x64-windows/vcpkg/blds/libvorbis/x64-windows-dbg/lib/CMakeFiles/Export/cc38caa321284793c52f43683a3b76fc/VorbisTargets-debug.cmake")
   endif()
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/Vorbis" TYPE FILE FILES
-    "C:/Users/Pol/source/repos/SDL2Template/vcpkg_installed/x64-windows/vcpkg/blds/libvorbis/x64-windows-dbg/VorbisConfig.cmake"
-    "C:/Users/Pol/source/repos/SDL2Template/vcpkg_installed/x64-windows/vcpkg/blds/libvorbis/x64-windows-dbg/VorbisConfigVersion.cmake"
+    "C:/Users/polss/Documents/GitHub/SDL2Template/vcpkg_installed/x64-windows/vcpkg/blds/libvorbis/x64-windows-dbg/VorbisConfig.cmake"
+    "C:/Users/polss/Documents/GitHub/SDL2Template/vcpkg_installed/x64-windows/vcpkg/blds/libvorbis/x64-windows-dbg/VorbisConfigVersion.cmake"
     )
 endif()
 

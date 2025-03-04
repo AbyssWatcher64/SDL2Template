@@ -1,8 +1,8 @@
-# Install script for directory: C:/Users/Pol/source/repos/SDL2Template/vcpkg_installed/x64-windows/vcpkg/blds/brotli/src/v1.1.0-958bece74c.clean
+# Install script for directory: C:/Users/polss/Documents/GitHub/SDL2Template/vcpkg_installed/x64-windows/vcpkg/blds/brotli/src/v1.1.0-958bece74c.clean
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "C:/Users/Pol/source/repos/SDL2Template/vcpkg_installed/x64-windows/vcpkg/pkgs/brotli_x64-windows")
+  set(CMAKE_INSTALL_PREFIX "C:/Users/polss/Documents/GitHub/SDL2Template/vcpkg_installed/x64-windows/vcpkg/pkgs/brotli_x64-windows")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -33,36 +33,36 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/tools/brotli" TYPE EXECUTABLE FILES "C:/Users/Pol/source/repos/SDL2Template/vcpkg_installed/x64-windows/vcpkg/blds/brotli/x64-windows-rel/brotli.exe")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/tools/brotli" TYPE EXECUTABLE FILES "C:/Users/polss/Documents/GitHub/SDL2Template/vcpkg_installed/x64-windows/vcpkg/blds/brotli/x64-windows-rel/brotli.exe")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY OPTIONAL FILES "C:/Users/Pol/source/repos/SDL2Template/vcpkg_installed/x64-windows/vcpkg/blds/brotli/x64-windows-rel/brotlienc.lib")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY OPTIONAL FILES "C:/Users/polss/Documents/GitHub/SDL2Template/vcpkg_installed/x64-windows/vcpkg/blds/brotli/x64-windows-rel/brotlienc.lib")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" TYPE SHARED_LIBRARY FILES "C:/Users/Pol/source/repos/SDL2Template/vcpkg_installed/x64-windows/vcpkg/blds/brotli/x64-windows-rel/brotlienc.dll")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" TYPE SHARED_LIBRARY FILES "C:/Users/polss/Documents/GitHub/SDL2Template/vcpkg_installed/x64-windows/vcpkg/blds/brotli/x64-windows-rel/brotlienc.dll")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY OPTIONAL FILES "C:/Users/Pol/source/repos/SDL2Template/vcpkg_installed/x64-windows/vcpkg/blds/brotli/x64-windows-rel/brotlidec.lib")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY OPTIONAL FILES "C:/Users/polss/Documents/GitHub/SDL2Template/vcpkg_installed/x64-windows/vcpkg/blds/brotli/x64-windows-rel/brotlidec.lib")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" TYPE SHARED_LIBRARY FILES "C:/Users/Pol/source/repos/SDL2Template/vcpkg_installed/x64-windows/vcpkg/blds/brotli/x64-windows-rel/brotlidec.dll")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" TYPE SHARED_LIBRARY FILES "C:/Users/polss/Documents/GitHub/SDL2Template/vcpkg_installed/x64-windows/vcpkg/blds/brotli/x64-windows-rel/brotlidec.dll")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY OPTIONAL FILES "C:/Users/Pol/source/repos/SDL2Template/vcpkg_installed/x64-windows/vcpkg/blds/brotli/x64-windows-rel/brotlicommon.lib")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY OPTIONAL FILES "C:/Users/polss/Documents/GitHub/SDL2Template/vcpkg_installed/x64-windows/vcpkg/blds/brotli/x64-windows-rel/brotlicommon.lib")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" TYPE SHARED_LIBRARY FILES "C:/Users/Pol/source/repos/SDL2Template/vcpkg_installed/x64-windows/vcpkg/blds/brotli/x64-windows-rel/brotlicommon.dll")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" TYPE SHARED_LIBRARY FILES "C:/Users/polss/Documents/GitHub/SDL2Template/vcpkg_installed/x64-windows/vcpkg/blds/brotli/x64-windows-rel/brotlicommon.dll")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
   if(CMAKE_INSTALL_CONFIG_NAME MATCHES "^([Rr][Ee][Ll][Ee][Aa][Ss][Ee])$")
-    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include" TYPE DIRECTORY FILES "C:/Users/Pol/source/repos/SDL2Template/vcpkg_installed/x64-windows/vcpkg/blds/brotli/src/v1.1.0-958bece74c.clean/c/include/brotli")
+    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include" TYPE DIRECTORY FILES "C:/Users/polss/Documents/GitHub/SDL2Template/vcpkg_installed/x64-windows/vcpkg/blds/brotli/src/v1.1.0-958bece74c.clean/c/include/brotli")
   endif()
 endif()
 
@@ -70,7 +70,7 @@ if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT
   if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/share/unofficial-brotli/unofficial-brotli-config.cmake")
     file(DIFFERENT _cmake_export_file_changed FILES
          "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/share/unofficial-brotli/unofficial-brotli-config.cmake"
-         "C:/Users/Pol/source/repos/SDL2Template/vcpkg_installed/x64-windows/vcpkg/blds/brotli/x64-windows-rel/CMakeFiles/Export/763bc5bdfe41530dbbed90361b0f2a15/unofficial-brotli-config.cmake")
+         "C:/Users/polss/Documents/GitHub/SDL2Template/vcpkg_installed/x64-windows/vcpkg/blds/brotli/x64-windows-rel/CMakeFiles/Export/763bc5bdfe41530dbbed90361b0f2a15/unofficial-brotli-config.cmake")
     if(_cmake_export_file_changed)
       file(GLOB _cmake_old_config_files "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/share/unofficial-brotli/unofficial-brotli-config-*.cmake")
       if(_cmake_old_config_files)
@@ -83,22 +83,22 @@ if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT
     endif()
     unset(_cmake_export_file_changed)
   endif()
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/unofficial-brotli" TYPE FILE FILES "C:/Users/Pol/source/repos/SDL2Template/vcpkg_installed/x64-windows/vcpkg/blds/brotli/x64-windows-rel/CMakeFiles/Export/763bc5bdfe41530dbbed90361b0f2a15/unofficial-brotli-config.cmake")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/unofficial-brotli" TYPE FILE FILES "C:/Users/polss/Documents/GitHub/SDL2Template/vcpkg_installed/x64-windows/vcpkg/blds/brotli/x64-windows-rel/CMakeFiles/Export/763bc5bdfe41530dbbed90361b0f2a15/unofficial-brotli-config.cmake")
   if(CMAKE_INSTALL_CONFIG_NAME MATCHES "^([Rr][Ee][Ll][Ee][Aa][Ss][Ee])$")
-    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/unofficial-brotli" TYPE FILE FILES "C:/Users/Pol/source/repos/SDL2Template/vcpkg_installed/x64-windows/vcpkg/blds/brotli/x64-windows-rel/CMakeFiles/Export/763bc5bdfe41530dbbed90361b0f2a15/unofficial-brotli-config-release.cmake")
+    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/unofficial-brotli" TYPE FILE FILES "C:/Users/polss/Documents/GitHub/SDL2Template/vcpkg_installed/x64-windows/vcpkg/blds/brotli/x64-windows-rel/CMakeFiles/Export/763bc5bdfe41530dbbed90361b0f2a15/unofficial-brotli-config-release.cmake")
   endif()
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "C:/Users/Pol/source/repos/SDL2Template/vcpkg_installed/x64-windows/vcpkg/blds/brotli/x64-windows-rel/libbrotlicommon.pc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "C:/Users/polss/Documents/GitHub/SDL2Template/vcpkg_installed/x64-windows/vcpkg/blds/brotli/x64-windows-rel/libbrotlicommon.pc")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "C:/Users/Pol/source/repos/SDL2Template/vcpkg_installed/x64-windows/vcpkg/blds/brotli/x64-windows-rel/libbrotlidec.pc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "C:/Users/polss/Documents/GitHub/SDL2Template/vcpkg_installed/x64-windows/vcpkg/blds/brotli/x64-windows-rel/libbrotlidec.pc")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "C:/Users/Pol/source/repos/SDL2Template/vcpkg_installed/x64-windows/vcpkg/blds/brotli/x64-windows-rel/libbrotlienc.pc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "C:/Users/polss/Documents/GitHub/SDL2Template/vcpkg_installed/x64-windows/vcpkg/blds/brotli/x64-windows-rel/libbrotlienc.pc")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)
@@ -109,5 +109,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Users/Pol/source/repos/SDL2Template/vcpkg_installed/x64-windows/vcpkg/blds/brotli/x64-windows-rel/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/Users/polss/Documents/GitHub/SDL2Template/vcpkg_installed/x64-windows/vcpkg/blds/brotli/x64-windows-rel/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

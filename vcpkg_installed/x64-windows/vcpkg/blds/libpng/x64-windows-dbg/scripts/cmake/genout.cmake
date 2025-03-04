@@ -13,18 +13,18 @@
 # SPDX-License-Identifier: libpng-2.0
 
 # Variables substituted from CMakeLists.txt
-set(SRCDIR "C:/Users/Pol/source/repos/SDL2Template/vcpkg_installed/x64-windows/vcpkg/blds/libpng/src/v1.6.43-e957a32120.clean")
-set(BINDIR "C:/Users/Pol/source/repos/SDL2Template/vcpkg_installed/x64-windows/vcpkg/blds/libpng/x64-windows-dbg")
+set(SRCDIR "C:/Users/polss/Documents/GitHub/SDL2Template/vcpkg_installed/x64-windows/vcpkg/blds/libpng/src/v1.6.43-e957a32120.clean")
+set(BINDIR "C:/Users/polss/Documents/GitHub/SDL2Template/vcpkg_installed/x64-windows/vcpkg/blds/libpng/x64-windows-dbg")
 
 set(AWK "AWK-NOTFOUND")
 set(CMAKE_C_COMPILER "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.42.34433/bin/Hostx64/x64/cl.exe")
 set(CMAKE_C_FLAGS  /nologo /DWIN32 /D_WINDOWS /utf-8 /MP )
-set(INCDIR "C:/Users/Pol/source/repos/SDL2Template/vcpkg_installed/x64-windows/vcpkg/blds/libpng/x64-windows-dbg")
+set(INCDIR "C:/Users/polss/Documents/GitHub/SDL2Template/vcpkg_installed/x64-windows/vcpkg/blds/libpng/x64-windows-dbg")
 set(PNG_PREFIX "")
 set(PNGLIB_MAJOR "1")
 set(PNGLIB_MINOR "6")
 set(PNGLIB_VERSION "1.6.43")
-set(ZLIBINCDIR "C:/Users/Pol/source/repos/SDL2Template/vcpkg_installed/x64-windows/x64-windows/include")
+set(ZLIBINCDIR "C:/Users/polss/Documents/GitHub/SDL2Template/vcpkg_installed/x64-windows/x64-windows/include")
 
 set(PLATFORM_C_FLAGS)
 if(APPLE)

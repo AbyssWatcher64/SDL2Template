@@ -146,7 +146,7 @@ void Window::ChangeResolution(int newWidth, int newHeight)
 
 void Window::ToggleFullScreen()
 {
-	LOG("EVENT: Deleting current window and changing resolution to: %d x %d", width, height);
+	LOG("Setting FullScreen with resolution: %d x %d", width, height);
 
 	TMP_SETFULLSCREEN = !TMP_SETFULLSCREEN;
 	Uint32 flags = InitializeAndSetWindowFlags();

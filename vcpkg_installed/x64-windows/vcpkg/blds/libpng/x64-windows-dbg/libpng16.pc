@@ -1,7 +1,7 @@
-prefix=C:/Users/Pol/source/repos/SDL2Template/vcpkg_installed/x64-windows/vcpkg/pkgs/libpng_x64-windows/debug
-exec_prefix=C:/Users/Pol/source/repos/SDL2Template/vcpkg_installed/x64-windows/vcpkg/pkgs/libpng_x64-windows/debug
-libdir=C:/Users/Pol/source/repos/SDL2Template/vcpkg_installed/x64-windows/vcpkg/pkgs/libpng_x64-windows/debug/lib
-includedir=C:/Users/Pol/source/repos/SDL2Template/vcpkg_installed/x64-windows/vcpkg/pkgs/libpng_x64-windows/debug/include/libpng16
+prefix=C:/Users/polss/Documents/GitHub/SDL2Template/vcpkg_installed/x64-windows/vcpkg/pkgs/libpng_x64-windows/debug
+exec_prefix=C:/Users/polss/Documents/GitHub/SDL2Template/vcpkg_installed/x64-windows/vcpkg/pkgs/libpng_x64-windows/debug
+libdir=C:/Users/polss/Documents/GitHub/SDL2Template/vcpkg_installed/x64-windows/vcpkg/pkgs/libpng_x64-windows/debug/lib
+includedir=C:/Users/polss/Documents/GitHub/SDL2Template/vcpkg_installed/x64-windows/vcpkg/pkgs/libpng_x64-windows/debug/include/libpng16
 
 Name: libpng
 Description: Loads and saves PNG files

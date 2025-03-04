@@ -1,4 +1,4 @@
-prefix=C:/Users/Pol/source/repos/SDL2Template/vcpkg_installed/x64-windows/vcpkg/pkgs/freetype_x64-windows/debug
+prefix=C:/Users/polss/Documents/GitHub/SDL2Template/vcpkg_installed/x64-windows/vcpkg/pkgs/freetype_x64-windows/debug
 exec_prefix=${prefix}
 libdir=${prefix}/lib
 includedir=${prefix}/include

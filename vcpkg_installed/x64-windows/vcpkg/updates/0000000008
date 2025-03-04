@@ -1,7 +1,7 @@
 Package: freetype
-Feature: bzip2
-Depends: bzip2
+Feature: zlib
+Depends: zlib
 Architecture: x64-windows
 Multi-Arch: same
-Description: Support bzip2 compressed fonts.
-Status: install ok half-installed
+Description: Use zlib instead of internal library for DEFLATE
+Status: purge ok not-installed

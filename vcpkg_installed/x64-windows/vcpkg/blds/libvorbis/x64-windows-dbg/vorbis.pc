@@ -1,9 +1,9 @@
 # libvorbis pkg-config source file
 
-prefix=C:/Users/Pol/source/repos/SDL2Template/vcpkg_installed/x64-windows/vcpkg/pkgs/libvorbis_x64-windows/debug
-exec_prefix=C:/Users/Pol/source/repos/SDL2Template/vcpkg_installed/x64-windows/vcpkg/pkgs/libvorbis_x64-windows/debug/bin
-libdir=C:/Users/Pol/source/repos/SDL2Template/vcpkg_installed/x64-windows/vcpkg/pkgs/libvorbis_x64-windows/debug/lib
-includedir=C:/Users/Pol/source/repos/SDL2Template/vcpkg_installed/x64-windows/vcpkg/pkgs/libvorbis_x64-windows/debug/include
+prefix=C:/Users/polss/Documents/GitHub/SDL2Template/vcpkg_installed/x64-windows/vcpkg/pkgs/libvorbis_x64-windows/debug
+exec_prefix=C:/Users/polss/Documents/GitHub/SDL2Template/vcpkg_installed/x64-windows/vcpkg/pkgs/libvorbis_x64-windows/debug/bin
+libdir=C:/Users/polss/Documents/GitHub/SDL2Template/vcpkg_installed/x64-windows/vcpkg/pkgs/libvorbis_x64-windows/debug/lib
+includedir=C:/Users/polss/Documents/GitHub/SDL2Template/vcpkg_installed/x64-windows/vcpkg/pkgs/libvorbis_x64-windows/debug/include
 
 Name: vorbis
 Description: vorbis is the primary Ogg Vorbis library

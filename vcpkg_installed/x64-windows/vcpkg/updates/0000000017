@@ -1,9 +1,6 @@
-Package: sdl2-ttf
-Version: 2.22.0
-Port-Version: 1
-Depends: freetype, sdl2, vcpkg-cmake, vcpkg-cmake-config
+Package: bzip2
+Feature: tool
 Architecture: x64-windows
 Multi-Arch: same
-Abi: 3f92b3420c8047eb277541407614cdd70a9fc2c495cd93f8c074452f894480e5
-Description: A library for rendering TrueType fonts with SDL
-Status: install ok installed
+Description: Builds bzip2 executable
+Status: purge ok not-installed

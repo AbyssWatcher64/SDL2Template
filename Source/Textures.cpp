@@ -50,8 +50,6 @@ bool Textures::CleanUp()
     return true;
 }
 
-
-
 SDL_Texture* const Textures::Load(std::string path)
 {
     SDL_Surface* surface = IMG_Load(path.c_str());

@@ -1,7 +1,9 @@
 Package: freetype
-Feature: brotli
-Depends: brotli
+Version: 2.13.3
+Depends: vcpkg-cmake, vcpkg-cmake-config
 Architecture: x64-windows
 Multi-Arch: same
-Description: Support decompression of WOFF2 streams
-Status: install ok half-installed
+Abi: 316b364d6370ed63d01ffb8c7a08ed10eb11832e56b8fe5f3fca9e6e5123082f
+Description: A library to render fonts.
+Default-Features: brotli, bzip2, png, zlib
+Status: purge ok not-installed

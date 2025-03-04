@@ -1,8 +1,8 @@
-prefix=C:/Users/Pol/source/repos/SDL2Template/vcpkg_installed/x64-windows/vcpkg/pkgs/zlib_x64-windows
-exec_prefix=C:/Users/Pol/source/repos/SDL2Template/vcpkg_installed/x64-windows/vcpkg/pkgs/zlib_x64-windows
-libdir=C:/Users/Pol/source/repos/SDL2Template/vcpkg_installed/x64-windows/vcpkg/pkgs/zlib_x64-windows/lib
-sharedlibdir=C:/Users/Pol/source/repos/SDL2Template/vcpkg_installed/x64-windows/vcpkg/pkgs/zlib_x64-windows/lib
-includedir=C:/Users/Pol/source/repos/SDL2Template/vcpkg_installed/x64-windows/vcpkg/pkgs/zlib_x64-windows/include
+prefix=C:/Users/polss/Documents/GitHub/SDL2Template/vcpkg_installed/x64-windows/vcpkg/pkgs/zlib_x64-windows
+exec_prefix=C:/Users/polss/Documents/GitHub/SDL2Template/vcpkg_installed/x64-windows/vcpkg/pkgs/zlib_x64-windows
+libdir=C:/Users/polss/Documents/GitHub/SDL2Template/vcpkg_installed/x64-windows/vcpkg/pkgs/zlib_x64-windows/lib
+sharedlibdir=C:/Users/polss/Documents/GitHub/SDL2Template/vcpkg_installed/x64-windows/vcpkg/pkgs/zlib_x64-windows/lib
+includedir=C:/Users/polss/Documents/GitHub/SDL2Template/vcpkg_installed/x64-windows/vcpkg/pkgs/zlib_x64-windows/include
 
 Name: zlib
 Description: zlib compression library

@@ -1,10 +1,9 @@
-Package: bzip2
-Version: 1.0.8
-Port-Version: 6
-Depends: vcpkg-cmake
+Package: sdl2-ttf
+Version: 2.22.0
+Port-Version: 1
+Depends: freetype, sdl2, vcpkg-cmake, vcpkg-cmake-config
 Architecture: x64-windows
 Multi-Arch: same
-Abi: 36218745ec1aa864bde4fdfd937a19e8e41a5c64e23dbd6789e19df482618335
-Description: bzip2 is a freely available, patent free, high-quality data compressor. It typically compresses files to within 10% to 15% of the best available techniques (the PPM family of statistical compressors), whilst being around twice as fast at compression and six times faster at decompression.
-Default-Features: tool
-Status: install ok half-installed
+Abi: 3f92b3420c8047eb277541407614cdd70a9fc2c495cd93f8c074452f894480e5
+Description: A library for rendering TrueType fonts with SDL
+Status: purge ok half-installed

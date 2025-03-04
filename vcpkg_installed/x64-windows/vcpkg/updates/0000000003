@@ -1,6 +1,7 @@
-Package: bzip2
-Feature: tool
+Package: freetype
+Feature: zlib
+Depends: zlib
 Architecture: x64-windows
 Multi-Arch: same
-Description: Builds bzip2 executable
-Status: install ok installed
+Description: Use zlib instead of internal library for DEFLATE
+Status: purge ok half-installed

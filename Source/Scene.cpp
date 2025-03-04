@@ -50,16 +50,13 @@ bool Scene::Render()
 	Engine::Singleton().renderer->QueueDebugRectangle(SDL_Rect({10,10,332,204}), {0,122,255,255}, true, true, Renderer::BACKGROUND);
 	Engine::Singleton().renderer->QueueDebugRectangle(SDL_Rect({0,0,100,100}), {255,0,0,255}, true, false);
 
-	//Engine::Singleton().renderer->QueueDebugCircle({ 100,100 }, 20, { 255,0,0,255 }, false, Renderer::DEBUG);
 	Engine::Singleton().renderer->QueueDebugCircle({ 176,224 / 2 }, 30, { 255,255,0,255 }, false, Renderer::UI);
 	Engine::Singleton().renderer->QueueDebugCircle({ 0,0 }, 10, { 255,255,0,255 }, false, Renderer::UI);
 	Engine::Singleton().renderer->QueueDebugCircle({ 10,10 }, 10, { 255,255,0,255 }, true, Renderer::UI);
 	Engine::Singleton().renderer->QueueDebugRectangle(SDL_Rect({ 352 / 2, 224 / 2,1,1 }), { 255,0,0,255 }, true, true, Renderer::UI);
 	Engine::Singleton().renderer->QueueDebugLine({ 0,0 }, { 100,200 }, { 0,255,255,255 }, false, Renderer::UI);
 
-	SDL_Rect sourceRectangle = SDL_Rect({ 0,0,48,67 });
-	SDL_Rect destinationRectangle = SDL_Rect({ 100,0,48,67 });
-	Engine::Singleton().renderer->QueueTexture(TMPPlayerTexture, sourceRectangle, destinationRectangle, false, Renderer::ENTITY);
+
 
 	// TEMP Player movement
 	if (Engine::Singleton().input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
@@ -90,11 +87,14 @@ bool Scene::Render()
 			TEMPPosition.SetY(TEMPPosition.GetY() + 1);
 		}
 	}
+
+	SDL_Rect sourceRectangle = SDL_Rect({ 0,0,48,67 });
+	SDL_Rect destinationRectangle = SDL_Rect({ TEMPPosition.GetX() - 48/2 ,TEMPPosition.GetY() - 67/2,48,67 });
+	Engine::Singleton().renderer->QueueTexture(TMPPlayerTexture, sourceRectangle, destinationRectangle, false, Renderer::ENTITY);
 	Engine::Singleton().renderer->QueueDebugCircle({ TEMPPosition.GetX(),TEMPPosition.GetY() }, 10, {255,255,0,255}, false, Renderer::UI);
 	camera->SetCenterCameraView({ TEMPPosition.GetX(),TEMPPosition.GetY() });
 
 
-		
 
 
 

@@ -1,2 +1,2 @@
-C:/Users/Pol/source/repos/SDL2Template/vcpkg_installed/x64-windows/vcpkg/pkgs/bzip2_x64-windows/debug/lib/bz2d.lib
-C:/Users/Pol/source/repos/SDL2Template/vcpkg_installed/x64-windows/vcpkg/pkgs/bzip2_x64-windows/debug/bin/bz2d.dll
+C:/Users/polss/Documents/GitHub/SDL2Template/vcpkg_installed/x64-windows/vcpkg/pkgs/bzip2_x64-windows/debug/lib/bz2d.lib
+C:/Users/polss/Documents/GitHub/SDL2Template/vcpkg_installed/x64-windows/vcpkg/pkgs/bzip2_x64-windows/debug/bin/bz2d.dll

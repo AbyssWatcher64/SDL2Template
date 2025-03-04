@@ -16,17 +16,15 @@ Renderer::Renderer()
 
 Renderer::~Renderer() {}
 
-
 bool Renderer::Awake()
 {
 	LOG("== Initializing Renderer ==");
 	bool ret = true;
 
-	Uint32 flags = SDL_RENDERER_ACCELERATED;
-
 	std::unordered_map<std::string, std::string> configFile = LoadConfig("config.ini");
 	bool vSync = GetBoolFromConfig(configFile, "vsync");
 
+	Uint32 flags = SDL_RENDERER_ACCELERATED;
 	if (vSync)
 	{
 		flags |= SDL_RENDERER_PRESENTVSYNC;

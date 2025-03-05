@@ -4,6 +4,7 @@
 #include "Module.hpp"
 
 class Camera;
+class PlayerInput;
 
 class Scene : public Module
 {
@@ -18,11 +19,18 @@ public:
 	bool Render() override;
 	bool PostUpdate() override;
 	bool CleanUp() override;
+
+	void TEMPTestInput();
+	void TEMPTestInput1();
+
 private:
 	std::shared_ptr<Camera> camera;
+	std::shared_ptr<PlayerInput> playerInput;
 	SDL_Texture* TMPPlayerTexture;
 
 	Vector2D TEMPPosition = Vector2D(352/2, 224/2);
+
+	bool TEMPcheckingForKeybinds = false;
 };	
 
 #endif

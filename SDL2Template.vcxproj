@@ -147,6 +147,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Source\Main.cpp" />
+    <ClCompile Include="Source\PlayerInput.cpp" />
     <ClCompile Include="Source\PrecisionTimer.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
@@ -184,6 +185,7 @@
     <ClInclude Include="Source\Log.hpp" />
     <ClInclude Include="Source\MemoryLeaksReporter.hpp" />
     <ClInclude Include="Source\Module.hpp" />
+    <ClInclude Include="Source\PlayerInput.hpp" />
     <ClInclude Include="Source\PrecisionTimer.hpp" />
     <ClInclude Include="Source\PreCompileHeaders.h" />
     <ClInclude Include="Source\Renderable.hpp" />

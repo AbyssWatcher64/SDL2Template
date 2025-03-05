@@ -5,6 +5,7 @@
 #include "Window.hpp"
 #include "Textures.hpp"
 #include "Camera.hpp"
+#include "PlayerInput.hpp" // included for remapping input test
 
 Scene::Scene() : Module()
 {
@@ -26,7 +27,8 @@ bool Scene::Awake()
 
 bool Scene::Start()
 {
-	camera = Engine::Singleton().renderer->GetCamera();
+	camera = Engine::Singleton().renderer->GetCamera(); 
+	playerInput = std::make_shared<PlayerInput>();
 	TMPPlayerTexture = Engine::Singleton().textures->Load("./Assets/Textures/Characters/GutsPixelArt_PROVISIONAL.png");
 	return true;
 }
@@ -73,7 +75,8 @@ bool Scene::Render()
 			TEMPPosition.SetX(TEMPPosition.GetX() - 1);
 		}
 	}
-	if (Engine::Singleton().input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
+	//if (Engine::Singleton().input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
+	if (playerInput->IsGameButtonPressedRepeat(GameButton::DPAD_UP))
 	{
 		if (TEMPPosition.GetY() > 0)
 		{
@@ -138,7 +141,15 @@ bool Scene::Render()
 		Engine::Singleton().window->ToggleFullScreen();
 	}
 
+	if (Engine::Singleton().input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
+	{
+		TEMPcheckingForKeybinds = true;
+	}
 
+	if (TEMPcheckingForKeybinds == true)
+	{
+		TEMPTestInput();
+	}
 
 
 	return true;
@@ -153,4 +164,20 @@ bool Scene::PostUpdate()
 bool Scene::CleanUp()
 {
 	return true;
+}
+
+void Scene::TEMPTestInput()
+{
+	int key = -1;
+	key = Engine::Singleton().input->GetNextKeyPressed();
+	if (key != -1)
+	{
+		playerInput->RemapKey(GameButton::DPAD_UP, key);
+		TEMPcheckingForKeybinds = false;
+	}
+}
+
+void Scene::TEMPTestInput1()
+{
+
 }

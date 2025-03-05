@@ -6,6 +6,8 @@
 #define NUM_MOUSE_BUTTONS 5
 #define MAX_KEYS 300
 
+class PlayerInput;
+
 enum WindowEvent
 {
     // WE = WindowEvent
@@ -36,6 +38,7 @@ public:
 
     KeyState GetKey(int id) const;
     KeyState GetMouseButtonDown(int id) const;
+    int GetNextKeyPressed();
 
     bool GetWindowEvent(WindowEvent ev) const;
 
@@ -50,6 +53,7 @@ public:
 
     Vector2D GetMousePosition() const;
     Vector2D GetMouseMotion() const;
+    std::shared_ptr<PlayerInput> GetPlayerInput() const;
 
 private:
     bool windowEvents[WE_TOTALCOUNT] = { false };
@@ -60,6 +64,8 @@ private:
     int mouseMotionY = 0;
     int mouseX = 0;
     int mouseY = 0;
+
+    std::shared_ptr<PlayerInput> playerInput;
 };
 
 #endif

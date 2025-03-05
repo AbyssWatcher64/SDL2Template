@@ -1,11 +1,13 @@
 #include "PreCompileHeaders.h"
 #include "Input.hpp"
 #include "Window.hpp"
+#include "PlayerInput.hpp"
 #include <unordered_set>
 
 Input::Input() : Module(), keyboard(MAX_KEYS, KEY_IDLE)
 {
     name = "input";
+    playerInput = std::make_shared<PlayerInput>();
 }
 
 // Destructor
@@ -53,6 +55,8 @@ bool Input::PreUpdate()
         ProcessSDLEvent(event);
     }
 
+    playerInput->Update();
+
     return true;
 }
 
@@ -72,6 +76,23 @@ KeyState Input::GetKey(int id) const
 KeyState Input::GetMouseButtonDown(int id) const 
 { 
     return mouseButtons[id - 1]; 
+}
+
+int Input::GetNextKeyPressed()
+{
+    SDL_Event event;
+
+    // Keep checking for an event until a key is pressed
+    while (true) 
+    {
+        while (SDL_PollEvent(&event)) 
+        {
+            if (event.type == SDL_KEYDOWN) 
+            {
+                return event.key.keysym.sym;  // Return the key code
+            }
+        }
+    }
 }
 
 bool Input::GetWindowEvent(WindowEvent ev) const
@@ -203,4 +224,9 @@ Vector2D Input::GetMousePosition() const
 Vector2D Input::GetMouseMotion() const
 {
     return Vector2D(mouseMotionX, mouseMotionY);
+}
+
+std::shared_ptr<PlayerInput> Input::GetPlayerInput() const
+{
+    return playerInput;
 }

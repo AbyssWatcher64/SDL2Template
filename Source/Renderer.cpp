@@ -276,7 +276,7 @@ void Renderer::SortEntityDrawOrder()
 	UpdateEntitiesBasePoint();
 
 	// Bubble swap
-	int n = entityLayer.size();
+	int n = (int)entityLayer.size();
 	for (int i = 0; i < n - 1; i++)
 	{
 		for (int j = 0; j < n - i - 1; j++)

@@ -78,11 +78,12 @@ bool Renderer::PostUpdate()
 {
 	SDL_SetRenderDrawColor(renderer, background.r, background.g, background.b, background.a);
 	SDL_RenderClear(renderer);
+	
 	UpdateOffset();
+	
+	SortEntityDrawOrder();
 
-	std::vector<std::unique_ptr<Renderable>>* layers[LAYER_TOTALCOUNT] = {
-		&backgroundLayer, &worldLayer, &entityLayer, &overEntityLayer, &debugLayer, &uiLayer
-	};
+	std::vector<std::unique_ptr<Renderable>>* layers[LAYER_TOTALCOUNT] = { &backgroundLayer, &worldLayer, &entityLayer, &overEntityLayer, &debugLayer, &uiLayer	};
 
 	int i = 0;
 	for (auto* layer : layers)  // Iterate through layer pointers
@@ -201,7 +202,7 @@ void Renderer::UpdateOffset()
 	offset.SetY(-camera->GetCameraYPosition());
 }
 
-bool Renderer::QueueTexture(SDL_Texture* texture, SDL_Rect& sourceRect, SDL_Rect& destRect, bool forceDrawInsideCamera, int layer, double angle, int pivotX, int pivotY)
+bool Renderer::QueueTexture(SDL_Texture* texture, SDL_Rect& sourceRect, SDL_Rect& destRect, bool forceDrawInsideCamera, int layer, int basePoint, double angle, int pivotX, int pivotY)
 {
 	bool ret = true;
 	if (!texture)
@@ -210,7 +211,7 @@ bool Renderer::QueueTexture(SDL_Texture* texture, SDL_Rect& sourceRect, SDL_Rect
 		ret = false;
 	}
 
-	std::unique_ptr<Renderable> renderable = std::make_unique<Renderable>(texture, sourceRect, destRect, forceDrawInsideCamera, layer, angle, pivotX, pivotY);
+	std::unique_ptr<Renderable> renderable = std::make_unique<Renderable>(texture, sourceRect, destRect, forceDrawInsideCamera, layer, basePoint, angle, pivotX, pivotY);
 	AddRenderableToAppropriateLayer(std::move(renderable));
 
 	return ret;
@@ -267,6 +268,30 @@ void Renderer::AddRenderableToAppropriateLayer(std::unique_ptr<Renderable> rende
 	case Renderer::UI:
 		uiLayer.emplace_back(std::move(renderable));
 		break;
+	}
+}
+
+void Renderer::SortEntityDrawOrder()
+{
+	UpdateEntitiesBasePoint();
+
+	// Bubble swap
+	int n = entityLayer.size();
+	for (int i = 0; i < n - 1; i++)
+	{
+		for (int j = 0; j < n - i - 1; j++)
+		{
+			if (entityLayer[j]->basePoint > entityLayer[j + 1]->basePoint)
+				swap(entityLayer[j], entityLayer[j + 1]);
+		}
+	}
+}
+
+void Renderer::UpdateEntitiesBasePoint()
+{
+	for (const auto& renderable : entityLayer)
+	{
+		renderable->basePoint = renderable->basePoint + renderable->destRect.y;
 	}
 }
 

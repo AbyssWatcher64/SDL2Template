@@ -8,7 +8,7 @@ class Renderable
 {
 public:
 	enum RenderType { TEXTURE, RECTANGLE, LINE, CIRCLE };
-	Renderable(SDL_Texture* texture, SDL_Rect& sourceRect, SDL_Rect& destRect, bool forceDrawInsideCamera, int layer, double angle, int pivotX, int pivotY);
+	Renderable(SDL_Texture* texture, SDL_Rect& sourceRect, SDL_Rect& destRect, bool forceDrawInsideCamera, int layer, int basePoint, double angle, int pivotX, int pivotY);
 	Renderable(const SDL_Rect& rect, const SDL_Color color, bool filled, bool forceDrawInsideCamera, int layer);
 	Renderable(Vector2D start, Vector2D end, SDL_Color color, bool forceDrawInsideCamera, int layer);
 	Renderable(Vector2D center, int radius, SDL_Color color, bool forceDrawInsideCamera, int layer);
@@ -25,6 +25,7 @@ public:
 	SDL_Rect destRect;
 	SDL_Rect rect;
 	int layer;
+	int basePoint;
 	double angle;
 	SDL_Point pivot;
 	bool forceDrawInsideCamera;

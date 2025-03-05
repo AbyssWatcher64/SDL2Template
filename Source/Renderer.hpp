@@ -48,12 +48,14 @@ public:
 	void UpdateOffset();
 
 	// Drawing
-	bool QueueTexture(SDL_Texture* texture, SDL_Rect& sourceRect, SDL_Rect& destRect, bool forceDrawInsideCamera = false, int layer = Renderer::BACKGROUND, double angle = 0, int pivotX = INT_MAX, int pivotY = INT_MAX);
+	bool QueueTexture(SDL_Texture* texture, SDL_Rect& sourceRect, SDL_Rect& destRect, bool forceDrawInsideCamera = false, int layer = Renderer::BACKGROUND, int basePoint = 0, double angle = 0, int pivotX = INT_MAX, int pivotY = INT_MAX);
 	bool QueueDebugRectangle(const SDL_Rect& rect, SDL_Color color, bool filled, bool forceDrawInsideCamera = false, int layer = Renderer::DEBUG);
 	bool QueueDebugLine(Vector2D start, Vector2D end, SDL_Color color, bool forceDrawInsideCamera = false, int layer = Renderer::DEBUG);
 	bool QueueDebugCircle(Vector2D center, int radius, SDL_Color color, bool forceDrawInsideCamera = false, int layer = Renderer::DEBUG);
 
 	void AddRenderableToAppropriateLayer(std::unique_ptr<Renderable> renderable);
+	void SortEntityDrawOrder();
+	void UpdateEntitiesBasePoint();
 
 	void DrawTexture(SDL_Texture* texture, SDL_Rect& sourceRect, SDL_Rect& destRect, bool forceDrawInsideCamera = false, int layer = Renderer::BACKGROUND, double angle = 0.0, int pivotX = 0, int pivotY = 0);
 	void DrawRectangle(SDL_Rect& rectangle, SDL_Color color, bool forceDrawInsideCamera = false, bool filled = true);

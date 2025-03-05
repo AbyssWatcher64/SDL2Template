@@ -90,7 +90,9 @@ bool Scene::Render()
 
 	SDL_Rect sourceRectangle = SDL_Rect({ 0,0,48,67 });
 	SDL_Rect destinationRectangle = SDL_Rect({ TEMPPosition.GetX() - 48/2 ,TEMPPosition.GetY() - 67/2,48,67 });
-	Engine::Singleton().renderer->QueueTexture(TMPPlayerTexture, sourceRectangle, destinationRectangle, false, Renderer::ENTITY);
+	SDL_Rect destinationRectangleStatic = SDL_Rect({ 10,100,48,67 });
+	Engine::Singleton().renderer->QueueTexture(TMPPlayerTexture, sourceRectangle, destinationRectangle, false, Renderer::ENTITY, 67);
+	Engine::Singleton().renderer->QueueTexture(TMPPlayerTexture, sourceRectangle, destinationRectangleStatic, false, Renderer::ENTITY,67);
 	Engine::Singleton().renderer->QueueDebugCircle({ TEMPPosition.GetX(),TEMPPosition.GetY() }, 10, {255,255,0,255}, false, Renderer::UI);
 	camera->SetCenterCameraView({ TEMPPosition.GetX(),TEMPPosition.GetY() });
 

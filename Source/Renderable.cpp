@@ -2,7 +2,7 @@
 #include "SDL2/SDL_render.h"
 #include <iostream>
 
-Renderable::Renderable(SDL_Texture* texture, SDL_Rect& sourceRect, SDL_Rect& destRect, bool forceDrawInsideCamera, int layer, double angle, int pivotX, int pivotY)
+Renderable::Renderable(SDL_Texture* texture, SDL_Rect& sourceRect, SDL_Rect& destRect, bool forceDrawInsideCamera, int layer, int basePoint, double angle, int pivotX, int pivotY)
 {
 	this->type = RenderType::TEXTURE;
 	this->texture = texture;
@@ -13,6 +13,7 @@ Renderable::Renderable(SDL_Texture* texture, SDL_Rect& sourceRect, SDL_Rect& des
 	this->destRect = destRect;
 	this->layer = layer;
 	this->angle = angle;
+	this->basePoint = basePoint;
 }
 
 Renderable::Renderable(const SDL_Rect& rect, const SDL_Color color, bool filled, bool forceDrawInsideCamera, int layer)

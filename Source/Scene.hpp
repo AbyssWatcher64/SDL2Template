@@ -20,8 +20,8 @@ public:
 	bool PostUpdate() override;
 	bool CleanUp() override;
 
-	void TEMPTestInput();
-	void TEMPTestInput1();
+	void KeyboardKeyRebind();
+	void ControllerKeyRebind();
 
 private:
 	std::shared_ptr<Camera> camera;
@@ -30,7 +30,8 @@ private:
 
 	Vector2D TEMPPosition = Vector2D(352/2, 224/2);
 
-	bool TEMPcheckingForKeybinds = false;
+	bool TEMPcheckingForKeyboardKeybinds = false;
+	bool TEMPcheckingForControllerButtonbinds = false;
 };	
 
 #endif

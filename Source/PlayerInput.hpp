@@ -15,8 +15,11 @@ enum class GameButton
 	BUTTON_LEFT,
 	BUTTON_RIGHT,
 
-	BUTTON_START
+	BUTTON_START,
+	BUTTON_SELECT,
 
+	BUTTON_LSHOULDER,
+	BUTTON_RSHOULDER
 };
 
 class PlayerInput
@@ -27,7 +30,7 @@ public:
 
 	void Update();
 
-	bool IsGameButtonPressedRepeat(GameButton button);
+	bool IsGameButtonRepeatedlyPressed(GameButton button);
 	bool IsGameButtonPressed(GameButton button);
 	bool IsGameButtonReleased(GameButton button);
 

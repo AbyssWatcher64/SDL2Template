@@ -61,29 +61,29 @@ bool Scene::Render()
 
 
 	// TEMP Player movement
-	if (Engine::Singleton().input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
+	if (playerInput->IsGameButtonRepeatedlyPressed(GameButton::DPAD_RIGHT) || playerInput->IsGameButtonRepeatedlyPressed(GameButton::BUTTON_RIGHT))
 	{
 		if (TEMPPosition.GetX() < 352)
 		{
 			TEMPPosition.SetX(TEMPPosition.GetX() + 1);
 		}
 	}
-	if (Engine::Singleton().input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
+	if (playerInput->IsGameButtonRepeatedlyPressed(GameButton::DPAD_LEFT) || playerInput->IsGameButtonRepeatedlyPressed(GameButton::BUTTON_LEFT))
 	{
 		if (TEMPPosition.GetX() > 0)
 		{
 			TEMPPosition.SetX(TEMPPosition.GetX() - 1);
 		}
 	}
-	//if (Engine::Singleton().input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
-	if (playerInput->IsGameButtonPressedRepeat(GameButton::DPAD_UP))
+
+	if (playerInput->IsGameButtonRepeatedlyPressed(GameButton::DPAD_UP) || playerInput->IsGameButtonRepeatedlyPressed(GameButton::BUTTON_UP))
 	{
 		if (TEMPPosition.GetY() > 0)
 		{
 			TEMPPosition.SetY(TEMPPosition.GetY() - 1);
 		}
 	}
-	if (Engine::Singleton().input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
+	if (playerInput->IsGameButtonRepeatedlyPressed(GameButton::DPAD_DOWN) || playerInput->IsGameButtonRepeatedlyPressed(GameButton::BUTTON_DOWN))
 	{
 		if (TEMPPosition.GetY() < 224)
 		{
@@ -143,12 +143,21 @@ bool Scene::Render()
 
 	if (Engine::Singleton().input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
 	{
-		TEMPcheckingForKeybinds = true;
+		TEMPcheckingForKeyboardKeybinds = true;
+	}
+	if (Engine::Singleton().input->GetKey(SDL_SCANCODE_K) == KEY_DOWN)
+	{
+		TEMPcheckingForControllerButtonbinds = true;
 	}
 
-	if (TEMPcheckingForKeybinds == true)
+	if (TEMPcheckingForKeyboardKeybinds == true)
 	{
-		TEMPTestInput();
+		KeyboardKeyRebind();
+	}
+
+	if (TEMPcheckingForControllerButtonbinds == true)
+	{
+		ControllerKeyRebind();
 	}
 
 
@@ -166,18 +175,24 @@ bool Scene::CleanUp()
 	return true;
 }
 
-void Scene::TEMPTestInput()
+void Scene::KeyboardKeyRebind()
 {
 	int key = -1;
-	key = Engine::Singleton().input->GetNextKeyPressed();
+	key = Engine::Singleton().input->GetNextKeyboardKeyPressed();
 	if (key != -1)
 	{
 		playerInput->RemapKey(GameButton::DPAD_UP, key);
-		TEMPcheckingForKeybinds = false;
+		TEMPcheckingForKeyboardKeybinds = false;
 	}
 }
 
-void Scene::TEMPTestInput1()
+void Scene::ControllerKeyRebind()
 {
-
+	int key = -1;
+	key = Engine::Singleton().input->GetNextControllerButtonPressed();
+	if (key != -1)
+	{
+		playerInput->RemapGamepadButton(GameButton::DPAD_UP, key);
+		TEMPcheckingForControllerButtonbinds = false;
+	}
 }

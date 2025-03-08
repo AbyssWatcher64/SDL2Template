@@ -19,7 +19,9 @@ enum class GameButton
 	BUTTON_SELECT,
 
 	BUTTON_LSHOULDER,
-	BUTTON_RSHOULDER
+	BUTTON_RSHOULDER,
+
+	UNKNOWN
 };
 
 class PlayerInput
@@ -43,6 +45,7 @@ private:
 	std::unordered_map<GameButton, int> gamepadBindings;
 
 	void DefaultBindings();
+	GameButton GetKeyboardGameButtonFromString(const std::string& str);
 };
 
 #endif

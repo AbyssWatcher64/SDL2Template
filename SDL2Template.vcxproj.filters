@@ -78,6 +78,9 @@
     <ClCompile Include="Source\PlayerInput.cpp">
       <Filter>Source Files\Engine</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Fonts.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="vcpkg.json">
@@ -146,6 +149,9 @@
       <Filter>Source Files\Utils</Filter>
     </ClInclude>
     <ClInclude Include="Source\PlayerInput.hpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Fonts.hpp">
       <Filter>Source Files\Engine</Filter>
     </ClInclude>
   </ItemGroup>

@@ -4,6 +4,7 @@
 #include "Window.hpp"
 #include "Camera.hpp"
 #include "IniParser.hpp"
+#include "Fonts.hpp" // REMOVE 
 
 Renderer::Renderer()
 {
@@ -83,7 +84,7 @@ bool Renderer::PostUpdate()
 	
 	SortEntityDrawOrder();
 
-	std::vector<std::unique_ptr<Renderable>>* layers[LAYER_TOTALCOUNT] = { &backgroundLayer, &worldLayer, &entityLayer, &overEntityLayer, &debugLayer, &uiLayer	};
+	std::vector<std::unique_ptr<Renderable>>* layers[LAYER_TOTALCOUNT] = { &backgroundLayer, &worldLayer, &entityLayer, &overEntityLayer, &debugLayer, &uiLayer, &textuiLayer	};
 
 	int i = 0;
 	for (auto* layer : layers)  // Iterate through layer pointers
@@ -107,11 +108,13 @@ bool Renderer::PostUpdate()
 			case Renderable::RenderType::CIRCLE:
 				DrawCircle(r->point1, r->radius, r->color, r->forceDrawInsideCamera);
 				break;
+			case Renderable::RenderType::TEXT:
+				DrawText(r->text, r->font, r->color, r->position, r->forceDrawInsideCamera);
+				break;
 			}
 		}
 		layer->clear();  // Use `layer->clear()` since it's now a pointer to a vector
 	}
-
 
 	SDL_RenderPresent(renderer);
 	return true;
@@ -242,6 +245,14 @@ bool Renderer::QueueDebugCircle(Vector2D center, int radius, SDL_Color color, bo
 	return true;
 }
 
+bool Renderer::QueueText(const std::string& text, TTF_Font* font, Vector2D position, bool forceDrawInsideCamera, int layer, SDL_Color color)
+{
+	std::unique_ptr<Renderable> renderable = std::make_unique<Renderable>(text, font, position, forceDrawInsideCamera, layer, color);
+	AddRenderableToAppropriateLayer(std::move(renderable));
+
+	return true;
+}
+
 void Renderer::AddRenderableToAppropriateLayer(std::unique_ptr<Renderable> renderable)
 {
 	switch (renderable->layer)
@@ -259,7 +270,7 @@ void Renderer::AddRenderableToAppropriateLayer(std::unique_ptr<Renderable> rende
 	case Renderer::ENTITY:
 		entityLayer.emplace_back(std::move(renderable));
 		break;
-	case Renderer::OVERENTITY:
+	case Renderer::OVER_ENTITY:
 		overEntityLayer.emplace_back(std::move(renderable));
 		break;
 	case Renderer::DEBUG:
@@ -267,6 +278,9 @@ void Renderer::AddRenderableToAppropriateLayer(std::unique_ptr<Renderable> rende
 		break;
 	case Renderer::UI:
 		uiLayer.emplace_back(std::move(renderable));
+		break;
+	case Renderer::TEXT_UI:
+		textuiLayer.emplace_back(std::move(renderable));
 		break;
 	}
 }
@@ -368,6 +382,43 @@ void Renderer::DrawCircleInternal(Vector2D vector, int radius, bool forceDrawIns
 	}
 
 	SDL_RenderDrawPoints(renderer, points, 360);
+}
+
+// Not working atm
+void Renderer::DrawText(const std::string& text, TTF_Font* font, SDL_Color color, Vector2D position, bool forceDrawInsideCamera)
+{
+	SDL_Texture* textTexture = CreateTextTexture(text, font, color);
+	if (!textTexture) return;
+
+	int offsetX = forceDrawInsideCamera ? 0 : offset.GetX();
+	int offsetY = forceDrawInsideCamera ? 0 : offset.GetY();
+
+	SDL_Rect textRect;
+	TTF_SizeText(font, text.c_str(), &textRect.w, &textRect.h); // Get text dimensions
+	textRect.x = position.GetX() + offsetX;
+	textRect.y = position.GetY() + offsetY;
+	SDL_RenderCopy(renderer, textTexture, nullptr, &textRect);
+	SDL_DestroyTexture(textTexture); // Free texture after rendering
+}
+
+SDL_Texture* Renderer::CreateTextTexture(const std::string& text, TTF_Font* font, SDL_Color color)
+{
+	SDL_Surface* textSurface = TTF_RenderText_Solid(font, text.c_str(), color);
+	if (!textSurface) 
+	{
+		LOG("Failed to create text surface: %s", TTF_GetError());
+		return nullptr;
+	}
+
+	SDL_Texture* textTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
+	SDL_FreeSurface(textSurface); // Free the surface after creating the texture
+
+	if (!textTexture) 
+	{
+		LOG("Failed to create text texture: %s", SDL_GetError());
+	}
+
+	return textTexture;
 }
 
 SDL_Renderer* Renderer::GetRenderer() const

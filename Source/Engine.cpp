@@ -5,6 +5,7 @@
 #include "Input.hpp"
 #include "Textures.hpp"
 #include "Scene.hpp"
+#include "Fonts.hpp"
 #include "Renderer.hpp"
 
 
@@ -18,6 +19,7 @@ Engine::Engine()
 	input = std::make_shared<Input>();			AddModule(input);
 	textures = std::make_shared<Textures>();	AddModule(textures);
 	scene = std::make_shared<Scene>();			AddModule(scene);
+	fonts = std::make_shared<Fonts>();			AddModule(fonts);
 	renderer = std::make_shared<Renderer>();	AddModule(renderer);
 }
 
@@ -50,7 +52,7 @@ bool Engine::Awake()
 			break;
 		}
 	}
-	return true;
+	return result;
 }
 
 //TEMP
@@ -65,7 +67,7 @@ bool Engine::Start()
 			break;
 		}
 	}
-	return true;
+	return result;
 }
 
 // Called each loop iteration

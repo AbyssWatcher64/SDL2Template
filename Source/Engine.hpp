@@ -12,6 +12,7 @@ class Window;
 class Input;
 class Textures;
 class Scene;
+class Fonts;
 class Renderer;
 
 class Engine
@@ -76,6 +77,7 @@ public:
 	std::shared_ptr<Input> input;
 	std::shared_ptr<Textures> textures;
 	std::shared_ptr<Scene> scene;
+	std::shared_ptr<Fonts> fonts;
 	std::shared_ptr<Renderer> renderer;
 
 private:

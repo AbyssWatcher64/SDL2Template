@@ -3,6 +3,7 @@
 
 #include "Module.hpp"
 #include "Vector2D.hpp"
+#include "SDL2/SDL_ttf.h"
 
 class Renderable;
 class Camera;
@@ -15,9 +16,10 @@ public:
 		BACKGROUND = 0,
 		WORLD = 1,
 		ENTITY = 2,
-		OVERENTITY = 3,
+		OVER_ENTITY = 3,
 		DEBUG = 4,
 		UI = 5,
+		TEXT_UI = 6,
 		LAYER_TOTALCOUNT
 	};
 
@@ -52,17 +54,20 @@ public:
 	bool QueueDebugRectangle(const SDL_Rect& rect, SDL_Color color, bool filled, bool forceDrawInsideCamera = false, int layer = Renderer::DEBUG);
 	bool QueueDebugLine(Vector2D start, Vector2D end, SDL_Color color, bool forceDrawInsideCamera = false, int layer = Renderer::DEBUG);
 	bool QueueDebugCircle(Vector2D center, int radius, SDL_Color color, bool forceDrawInsideCamera = false, int layer = Renderer::DEBUG);
+	bool QueueText(const std::string& text, TTF_Font* font, Vector2D position, bool forceDrawInsideCamera = true, int layer = Renderer::TEXT_UI, SDL_Color color = { 255, 255, 255, 255 });
 
 	void AddRenderableToAppropriateLayer(std::unique_ptr<Renderable> renderable);
 	void SortEntityDrawOrder();
 	void UpdateEntitiesBasePoint();
 
-	void DrawTexture(SDL_Texture* texture, SDL_Rect& sourceRect, SDL_Rect& destRect, bool forceDrawInsideCamera = false, int layer = Renderer::BACKGROUND, double angle = 0.0, int pivotX = 0, int pivotY = 0);
-	void DrawRectangle(SDL_Rect& rectangle, SDL_Color color, bool forceDrawInsideCamera = false, bool filled = true);
-	void DrawLine(Vector2D originVector, Vector2D endVector, SDL_Color color, bool forceDrawInsideCamera = false);
-	bool DrawCircle(Vector2D vector, int radius, SDL_Color rgb, bool forceDrawInsideCamera = false);
-	void DrawCircleInternal(Vector2D vector, int radius, bool forceDrawInsideCamera = false);
+	void DrawTexture(SDL_Texture* texture, SDL_Rect& sourceRect, SDL_Rect& destRect, bool forceDrawInsideCamera, int layer = Renderer::BACKGROUND, double angle = 0.0, int pivotX = 0, int pivotY = 0);
+	void DrawRectangle(SDL_Rect& rectangle, SDL_Color color, bool forceDrawInsideCamera, bool filled = true);
+	void DrawLine(Vector2D originVector, Vector2D endVector, SDL_Color color, bool forceDrawInsideCamera);
+	bool DrawCircle(Vector2D vector, int radius, SDL_Color rgb, bool forceDrawInsideCamera);
+	void DrawCircleInternal(Vector2D vector, int radius, bool forceDrawInsideCamera);
+	void DrawText(const std::string& text, TTF_Font* font, SDL_Color color, Vector2D position, bool forceDrawInsideCamera);
 
+	SDL_Texture* CreateTextTexture(const std::string& text, TTF_Font* font, SDL_Color color);
 
 	void SetBackgroundColor(SDL_Color color);
 
@@ -80,6 +85,7 @@ private:
 	std::vector<std::unique_ptr<Renderable>> overEntityLayer;
 	std::vector<std::unique_ptr<Renderable>> debugLayer;
 	std::vector<std::unique_ptr<Renderable>> uiLayer;
+	std::vector<std::unique_ptr<Renderable>> textuiLayer;
 	std::shared_ptr<Camera> camera;
 
 	SDL_Rect viewport;

@@ -1,5 +1,6 @@
 #include "PreCompileHeaders.h"
 #include "Scene.hpp"
+#include "Fonts.hpp"
 #include "Renderer.hpp"
 #include "Input.hpp"
 #include "Window.hpp"
@@ -57,7 +58,7 @@ bool Scene::Render()
 	Engine::Singleton().renderer->QueueDebugCircle({ 10,10 }, 10, { 255,255,0,255 }, true, Renderer::UI);
 	Engine::Singleton().renderer->QueueDebugRectangle(SDL_Rect({ 352 / 2, 224 / 2,1,1 }), { 255,0,0,255 }, true, true, Renderer::UI);
 	Engine::Singleton().renderer->QueueDebugLine({ 0,0 }, { 100,200 }, { 0,255,255,255 }, false, Renderer::UI);
-
+	Engine::Singleton().renderer->QueueText("Hello", Engine::Singleton().fonts->GetDefaultFont(), { 10,10 }, false);
 
 
 	// TEMP Player movement
@@ -160,13 +161,15 @@ bool Scene::Render()
 		ControllerKeyRebind();
 	}
 
+	//Engine::Singleton().renderer->DrawText("HELLOOO", Engine::Singleton().fonts->GetDefaultFont(), { 255,255,255,255 }, {10,10});
+
 
 	return true;
 }
 
 bool Scene::PostUpdate()
 {
-
+	//Engine::Singleton().renderer->DrawText("hello", Engine::Singleton().fonts->GetDefaultFont(), { 255,255,255,255 }, 10, 10);
 	return true;
 }
 

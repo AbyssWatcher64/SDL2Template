@@ -1,6 +1,6 @@
 #include "Renderable.hpp"
 #include "SDL2/SDL_render.h"
-#include <iostream>
+//#include <iostream>
 
 Renderable::Renderable(SDL_Texture* texture, SDL_Rect& sourceRect, SDL_Rect& destRect, bool forceDrawInsideCamera, int layer, int basePoint, double angle, int pivotX, int pivotY)
 {
@@ -44,6 +44,17 @@ Renderable::Renderable(Vector2D center, int radius, SDL_Color color, bool forceD
 	this->color = color;
 	this->forceDrawInsideCamera = forceDrawInsideCamera;
 	this->layer = layer;
+}
+
+Renderable::Renderable(const std::string& text, TTF_Font* font, Vector2D position, bool forceDrawInsideCamera, int layer, SDL_Color color)
+{
+	this->type = RenderType::TEXT;
+	this->text = text;
+	this->font = font;
+	this->position = position;
+	this->forceDrawInsideCamera = forceDrawInsideCamera;
+	this-> layer = layer;
+	this->color = color;
 }
 
 Renderable::~Renderable()

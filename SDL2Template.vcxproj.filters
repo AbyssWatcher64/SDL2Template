@@ -5,10 +5,6 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
@@ -27,55 +23,39 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <None Include="vcpkg.json">
+      <Filter>Configuration Files</Filter>
+    </None>
+    <None Include="vcpkg-configuration.json">
+      <Filter>Configuration Files</Filter>
+    </None>
+    <None Include="config.ini">
+      <Filter>Configuration Files</Filter>
+    </None>
+    <None Include="keybinds.ini">
+      <Filter>Configuration Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\Camera.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
     <ClCompile Include="Source\Engine.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EngineFSM.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Fonts.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Input.cpp">
       <Filter>Source Files\Engine</Filter>
     </ClCompile>
     <ClCompile Include="Source\Main.cpp">
       <Filter>Source Files\Engine</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Timer.cpp">
-      <Filter>Source Files\Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\PreCompileHeaders.cpp">
-      <Filter>Source Files\Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Log.cpp">
-      <Filter>Source Files\Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\EngineFSM.cpp">
-      <Filter>Source Files\Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Window.cpp">
-      <Filter>Source Files\Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\PrecisionTimer.cpp">
-      <Filter>Source Files\Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Input.cpp">
-      <Filter>Source Files\Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Vector2D.cpp">
-      <Filter>Source Files\Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Renderer.cpp">
-      <Filter>Source Files\Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Scene.cpp">
-      <Filter>Source Files\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Camera.cpp">
-      <Filter>Source Files\Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Textures.cpp">
-      <Filter>Source Files\Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\IniParser.cpp">
-      <Filter>Source Files\Utils</Filter>
-    </ClCompile>
     <ClCompile Include="Source\PlayerInput.cpp">
-      <Filter>Source Files\Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Fonts.cpp">
       <Filter>Source Files\Engine</Filter>
     </ClCompile>
     <ClCompile Include="Source\RenderableCircle.cpp">
@@ -93,24 +73,43 @@
     <ClCompile Include="Source\RenderableTexture.cpp">
       <Filter>Source Files\Engine</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="vcpkg.json">
-      <Filter>Configuration Files</Filter>
-    </None>
-    <None Include="vcpkg-configuration.json">
-      <Filter>Configuration Files</Filter>
-    </None>
-    <None Include="config.ini">
-      <Filter>Configuration Files</Filter>
-    </None>
-    <None Include="keybinds.ini">
-      <Filter>Configuration Files</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Source\PrecisionTimer.hpp">
+    <ClCompile Include="Source\Renderer.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Textures.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Window.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\IniParser.cpp">
       <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Log.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\PrecisionTimer.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\PreCompileHeaders.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Timer.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Vector2D.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\TestBed.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\Camera.hpp">
+      <Filter>Source Files\Engine</Filter>
     </ClInclude>
     <ClInclude Include="Source\Engine.hpp">
       <Filter>Source Files\Engine</Filter>
@@ -118,52 +117,19 @@
     <ClInclude Include="Source\EngineFSM.hpp">
       <Filter>Source Files\Engine</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Module.hpp">
+    <ClInclude Include="Source\Fonts.hpp">
       <Filter>Source Files\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Window.hpp">
-      <Filter>Source Files\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Log.hpp">
-      <Filter>Source Files\Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\PreCompileHeaders.h">
-      <Filter>Source Files\Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Timer.hpp">
-      <Filter>Source Files\Utils</Filter>
     </ClInclude>
     <ClInclude Include="Source\Input.hpp">
       <Filter>Source Files\Engine</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Vector2D.hpp">
-      <Filter>Source Files\Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Renderer.hpp">
+    <ClInclude Include="Source\Module.hpp">
       <Filter>Source Files\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Scene.hpp">
-      <Filter>Source Files\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Renderable.hpp">
-      <Filter>Source Files\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\MemoryLeaksReporter.hpp">
-      <Filter>Source Files\Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Camera.hpp">
-      <Filter>Source Files\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Textures.hpp">
-      <Filter>Source Files\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\IniParser.hpp">
-      <Filter>Source Files\Utils</Filter>
     </ClInclude>
     <ClInclude Include="Source\PlayerInput.hpp">
       <Filter>Source Files\Engine</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Fonts.hpp">
+    <ClInclude Include="Source\Renderable.hpp">
       <Filter>Source Files\Engine</Filter>
     </ClInclude>
     <ClInclude Include="Source\RenderableCircle.hpp">
@@ -181,8 +147,44 @@
     <ClInclude Include="Source\RenderableTexture.hpp">
       <Filter>Source Files\Engine</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Renderer.hpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Textures.hpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Window.hpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene.hpp">
+      <Filter>Source Files\Game</Filter>
+    </ClInclude>
     <ClInclude Include="Source\Globals.hpp">
       <Filter>Source Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\IniParser.hpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Log.hpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MemoryLeaksReporter.hpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PrecisionTimer.hpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PreCompileHeaders.h">
+      <Filter>Source Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Timer.hpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Vector2D.hpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\TestBed.hpp">
+      <Filter>Source Files\Game</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

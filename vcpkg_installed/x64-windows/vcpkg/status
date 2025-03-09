@@ -2,14 +2,14 @@ Package: vcpkg-cmake-config
 Version: 2024-05-23
 Architecture: x64-windows
 Multi-Arch: same
-Abi: 39b025ad10a63aca9472cda8dd20fa335dfe3421217f11a672d03857b534d9d2
+Abi: 0e046a4dc0252ba856356d220e8b2a06fdb66b1612b283d083fc5f6a764954e7
 Status: install ok installed
 
 Package: vcpkg-cmake
 Version: 2024-04-23
 Architecture: x64-windows
 Multi-Arch: same
-Abi: c7241d6692ddb2c8ff48ae936b885e7a8fef40986d49e7a6c8a91f8429ba4baa
+Abi: a31ddb07b876e8792679ddc75c10f1e2f8243f231f823178131f01c5a11f40dc
 Status: install ok installed
 
 Package: sdl2
@@ -17,7 +17,7 @@ Version: 2.30.7
 Depends: vcpkg-cmake, vcpkg-cmake-config
 Architecture: x64-windows
 Multi-Arch: same
-Abi: 70fe5f3bce81af180b3e7eca7113b7367beeba6f3862adc5eff9f805c2c5af03
+Abi: 03bea215080bbc5116a3fa951eb6613be3714e56bab2dd024c406873e71d62e6
 Description: Simple DirectMedia Layer is a cross-platform development library designed to provide low level access to audio, keyboard, mouse, joystick, and graphics hardware via OpenGL and Direct3D.
 Status: install ok installed
 
@@ -26,7 +26,7 @@ Version: 1.3.1
 Depends: vcpkg-cmake
 Architecture: x64-windows
 Multi-Arch: same
-Abi: 817a5d177df128e5564f88bf8756d40fca315abc1a0650c810df26e8ab07d34e
+Abi: 533aef9f6c3fa6a7a094a33384832afea50ffcb664bb4cf070c4aa86612bf04b
 Description: A compression library
 Status: install ok installed
 
@@ -36,7 +36,7 @@ Port-Version: 3
 Depends: vcpkg-cmake, vcpkg-cmake-config, zlib
 Architecture: x64-windows
 Multi-Arch: same
-Abi: 76839b1ad068fe007e0f0c4d71f4d68b8dc1a7c6bfccd5e3fa905c6dcce1a562
+Abi: 96fd56b7162f924acbfd6cfed405c928f278f0f512a8700b496bb9f539fd35db
 Description: libpng is a library implementing an interface for reading and writing PNG (Portable Network Graphics) format files
 Status: install ok installed
 
@@ -46,7 +46,7 @@ Port-Version: 2
 Depends: libpng, sdl2, vcpkg-cmake, vcpkg-cmake-config
 Architecture: x64-windows
 Multi-Arch: same
-Abi: bf9f992bbb906f2a250924fd0c47cadc8730070c04c207a654af3b2d91caae85
+Abi: 97ce8631e461818d6c305c8e0143c227d93e5a5147d370cb045d69765f7ffbd3
 Description: SDL_image is an image file loading library. It loads images as SDL surfaces and textures, and supports the following formats: BMP, GIF, JPEG, LBM, PCX, PNG, PNM, TGA, TIFF, WEBP, XCF, XPM, XV
 Status: install ok installed
 
@@ -55,7 +55,7 @@ Version: 5.7.0
 Depends: vcpkg-cmake, vcpkg-cmake-config
 Architecture: x64-windows
 Multi-Arch: same
-Abi: a7500ad6a1eddb5da09bbc4ffb0b48057fa120cbbb0769f6d3fd7946b0f7f13b
+Abi: 4a138ef1ab949cf6e0f8f8fd50319e3257b20e089ef9425e22bd7a0bfbbdad1a
 Description: WavPack encode/decode library, command-line programs, and several plugins
 Status: install ok installed
 
@@ -65,7 +65,7 @@ Port-Version: 1
 Depends: vcpkg-cmake, vcpkg-cmake-config
 Architecture: x64-windows
 Multi-Arch: same
-Abi: 8c817a271674708b6c58fbfc177f298d234d2fc8763539e8088102561a2ab067
+Abi: 85cdbc423b2db909d6b0a14d482417d1cdb96bea41dcade94d289889b23069fc
 Description: Ogg is a multimedia container format, and the native file and stream format for the Xiph.org multimedia codecs.
 Status: install ok installed
 
@@ -75,7 +75,7 @@ Port-Version: 3
 Depends: libogg, vcpkg-cmake, vcpkg-cmake-config
 Architecture: x64-windows
 Multi-Arch: same
-Abi: a5f8144318ee724923a6fcc5bf862ed147d2c8b5071557aa21bc07a33de596d7
+Abi: d311347a4feeda267f3a3663992151732d0125b396cd2864bacb38c697e1cd2e
 Description: Ogg Vorbis is a fully open, non-proprietary, patent-and-royalty-free, general-purpose compressed audio format
 Status: install ok installed
 
@@ -85,7 +85,7 @@ Port-Version: 3
 Depends: libvorbis, sdl2, vcpkg-cmake, vcpkg-cmake-config
 Architecture: x64-windows
 Multi-Arch: same
-Abi: 37797dc31c0f0c40a95fadb9bf3273591bcbb086a45a0ca7cf33a360dcec44f1
+Abi: 5187f1f033923e1fff7f725bfa823067adec412e2a8e2f1b61743ce56036b48b
 Description: Multi-channel audio mixer library for SDL.
 Default-Features: wavpack
 Status: install ok installed
@@ -104,7 +104,7 @@ Port-Version: 6
 Depends: vcpkg-cmake
 Architecture: x64-windows
 Multi-Arch: same
-Abi: 36218745ec1aa864bde4fdfd937a19e8e41a5c64e23dbd6789e19df482618335
+Abi: 248230915dfdcc16570a0a20ad3c50e0db61e67deef81d43be7614b85e20490d
 Description: bzip2 is a freely available, patent free, high-quality data compressor. It typically compresses files to within 10% to 15% of the best available techniques (the PPM family of statistical compressors), whilst being around twice as fast at compression and six times faster at decompression.
 Default-Features: tool
 Status: install ok installed
@@ -122,7 +122,7 @@ Port-Version: 1
 Depends: vcpkg-cmake, vcpkg-cmake-config
 Architecture: x64-windows
 Multi-Arch: same
-Abi: 4daf95580107c991b44dff8ee837a9d7f200eef8d90e0af7e8ab5e2868956f2c
+Abi: 3076f19bc6c9a351ef22a53e46b19ec9e9828577854c50d0565b6b982b327d2c
 Description: a generic-purpose lossless compression algorithm that compresses data using a combination of a modern variant of the LZ77 algorithm, Huffman coding and 2nd order context modeling.
 Status: install ok installed
 
@@ -131,7 +131,7 @@ Version: 2.13.3
 Depends: vcpkg-cmake, vcpkg-cmake-config
 Architecture: x64-windows
 Multi-Arch: same
-Abi: 316b364d6370ed63d01ffb8c7a08ed10eb11832e56b8fe5f3fca9e6e5123082f
+Abi: 2d15ca6a2a606265bea6e36e9f58447e721367ade1434d131f332c3a04c87081
 Description: A library to render fonts.
 Default-Features: brotli, bzip2, png, zlib
 Status: install ok installed
@@ -174,7 +174,7 @@ Port-Version: 1
 Depends: freetype, sdl2, vcpkg-cmake, vcpkg-cmake-config
 Architecture: x64-windows
 Multi-Arch: same
-Abi: 3f92b3420c8047eb277541407614cdd70a9fc2c495cd93f8c074452f894480e5
+Abi: 5d78a77cf32041d90d00f9de67a6f00e101f26d26b8896e4f45ba0506c308821
 Description: A library for rendering TrueType fonts with SDL
 Status: install ok installed
 

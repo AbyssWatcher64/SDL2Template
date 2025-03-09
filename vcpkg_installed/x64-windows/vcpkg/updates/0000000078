@@ -4,6 +4,6 @@ Port-Version: 1
 Depends: freetype, sdl2, vcpkg-cmake, vcpkg-cmake-config
 Architecture: x64-windows
 Multi-Arch: same
-Abi: 5d78a77cf32041d90d00f9de67a6f00e101f26d26b8896e4f45ba0506c308821
+Abi: 3f92b3420c8047eb277541407614cdd70a9fc2c495cd93f8c074452f894480e5
 Description: A library for rendering TrueType fonts with SDL
 Status: install ok half-installed

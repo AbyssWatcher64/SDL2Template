@@ -4,6 +4,6 @@ Port-Version: 1
 Depends: vcpkg-cmake, vcpkg-cmake-config
 Architecture: x64-windows
 Multi-Arch: same
-Abi: 85cdbc423b2db909d6b0a14d482417d1cdb96bea41dcade94d289889b23069fc
+Abi: 8c817a271674708b6c58fbfc177f298d234d2fc8763539e8088102561a2ab067
 Description: Ogg is a multimedia container format, and the native file and stream format for the Xiph.org multimedia codecs.
 Status: install ok half-installed

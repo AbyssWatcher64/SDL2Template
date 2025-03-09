@@ -9,7 +9,7 @@ Window::Window() : Module()
 {
 	window = nullptr;
 	name = "window";
-	gameTitle = "SDL Engine Template";
+	gameTitle = "Memories of Luminumbra";
 	engineIconPath = "./Assets/UI/Misc/EngineIcon.png";
 }
 

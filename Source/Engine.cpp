@@ -5,6 +5,7 @@
 #include "Input.hpp"
 #include "Textures.hpp"
 #include "Scene.hpp"
+#include "TestBed.hpp"
 #include "Fonts.hpp"
 #include "Renderer.hpp"
 
@@ -19,6 +20,7 @@ Engine::Engine()
 	input = std::make_shared<Input>();			AddModule(input);
 	textures = std::make_shared<Textures>();	AddModule(textures);
 	scene = std::make_shared<Scene>();			AddModule(scene);
+	testBed = std::make_shared<TestBed>();		AddModule(testBed);
 	fonts = std::make_shared<Fonts>();			AddModule(fonts);
 	renderer = std::make_shared<Renderer>();	AddModule(renderer);
 }

@@ -24,6 +24,7 @@
     <ProjectGuid>{5d12c2e7-f4af-426f-97a6-4b5f47d3dd98}</ProjectGuid>
     <RootNamespace>SDL2Template</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>MemoriesOfLuminumbra</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -136,6 +137,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <None Include="config.ini" />
+    <None Include="keybinds.ini" />
+    <None Include="vcpkg-configuration.json" />
+    <None Include="vcpkg.json" />
+  </ItemGroup>
+  <ItemGroup>
     <ClCompile Include="Source\Camera.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
@@ -174,9 +181,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Source\Scene.cpp" />
-    <ClCompile Include="Source\Textures.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
-    </ClCompile>
+    <ClCompile Include="Source\TestBed.cpp" />
+    <ClCompile Include="Source\Textures.cpp" />
     <ClCompile Include="Source\Timer.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
@@ -186,12 +192,6 @@
     <ClCompile Include="Source\Window.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="config.ini" />
-    <None Include="keybinds.ini" />
-    <None Include="vcpkg-configuration.json" />
-    <None Include="vcpkg.json" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Camera.hpp" />
@@ -215,6 +215,7 @@
     <ClInclude Include="Source\RenderableTexture.hpp" />
     <ClInclude Include="Source\Renderer.hpp" />
     <ClInclude Include="Source\Scene.hpp" />
+    <ClInclude Include="Source\TestBed.hpp" />
     <ClInclude Include="Source\Textures.hpp" />
     <ClInclude Include="Source\Timer.hpp" />
     <ClInclude Include="Source\Vector2D.hpp" />

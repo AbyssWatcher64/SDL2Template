@@ -2,12 +2,13 @@
 #include "Scene.hpp"
 #include "Fonts.hpp"
 #include "Renderer.hpp"
-#include "Input.hpp"
+//#include "Input.hpp" // I don't think Input is necessary if we're using the InputPlayer functions.
 #include "Window.hpp"
 #include "Textures.hpp"
 #include "Camera.hpp"
-#include "PlayerInput.hpp" // included for remapping input test
+#include "PlayerInput.hpp"
 
+// TestBed = Test Scene. Use it for all your testing.
 Scene::Scene() : Module()
 {
 	name = "scene";
@@ -30,7 +31,7 @@ bool Scene::Start()
 {
 	camera = Engine::Singleton().renderer->GetCamera(); 
 	playerInput = std::make_shared<PlayerInput>();
-	TMPPlayerTexture = Engine::Singleton().textures->Load("./Assets/Textures/Characters/GutsPixelArt_PROVISIONAL.pneyg");
+
 	return true;
 }
 
@@ -48,124 +49,6 @@ bool Scene::Update(float dt)
 
 bool Scene::Render()
 {
-	// Render examples
-	Engine::Singleton().renderer->QueueDebugRectangle(SDL_Rect({ 0,0,50,50 }), { 0,0,255,255 }, true, false, Renderer::UI);
-	Engine::Singleton().renderer->QueueDebugRectangle(SDL_Rect({0,0,352,224}), {0,255,0,255}, true, true, Renderer::BACKGROUND);
-	Engine::Singleton().renderer->QueueDebugRectangle(SDL_Rect({10,10,332,204}), {0,122,255,255}, true, true, Renderer::BACKGROUND);
-	Engine::Singleton().renderer->QueueDebugRectangle(SDL_Rect({0,0,100,100}), {255,0,0,255});
-
-	Engine::Singleton().renderer->QueueDebugCircle({ 176,224 / 2 }, 30, { 255,255,0,255 }, false, Renderer::UI);
-	Engine::Singleton().renderer->QueueDebugCircle({ 0,0 }, 10, { 255,255,0,255 }, false, Renderer::UI);
-	Engine::Singleton().renderer->QueueDebugCircle({ 10,10 }, 10, { 255,255,0,255 }, true, Renderer::UI);
-	Engine::Singleton().renderer->QueueDebugRectangle(SDL_Rect({ 352 / 2, 224 / 2,1,1 }), { 255,0,0,255 }, true, true, Renderer::UI);
-	Engine::Singleton().renderer->QueueDebugLine({ 0,0 }, { 100,200 }, { 0,255,255,255 }, false, Renderer::UI);
-	Engine::Singleton().renderer->QueueText("Hello", { 10,10 });
-
-	Engine::Singleton().renderer->QueueDebugRectangle(SDL_Rect({ 0, 224 - 224 / 4,352, 224 / 4 }), { 0,0,0,255 }, true, true, Renderer::UI);
-	Engine::Singleton().renderer->QueueText("Party members:", { 10,224 - 224 / 4 }, FontName::DEFAULT_FONT1);
-	Engine::Singleton().renderer->QueueText("Guts1        10 HP  10 AP", { 10,224 - 224 / 4 + 15 }, FontName::FONTNAME_TOTALCOUNT);
-	Engine::Singleton().renderer->QueueText("Guts2        10 HP  10 AP", { 10,224 - 224 / 4 + 30 });
-
-	SDL_Rect sourceRectangle = SDL_Rect({ 0,0,48,67 });
-	SDL_Rect destinationRectangle = SDL_Rect({ TEMPPosition.GetX() - 48 / 2 ,TEMPPosition.GetY() - 67 / 2,48,67 });
-	SDL_Rect destinationRectangleStatic = SDL_Rect({ 10,100,48,67 });
-	Engine::Singleton().renderer->QueueTexture(TMPPlayerTexture, sourceRectangle, destinationRectangle, false, Renderer::ENTITY, 10);
-	Engine::Singleton().renderer->QueueTexture(TMPPlayerTexture, sourceRectangle, destinationRectangleStatic, false, Renderer::ENTITY, 15);
-	Engine::Singleton().renderer->QueueDebugCircle({ TEMPPosition.GetX(),TEMPPosition.GetY() }, 10, { 255,255,0,255 }, false, Renderer::UI);
-	camera->SetCenterCameraView({ TEMPPosition.GetX(),TEMPPosition.GetY() });
-
-	// TEMP Player movement
-	if (playerInput->IsGameButtonRepeatedlyPressed(GameButton::DPAD_RIGHT) || playerInput->IsGameButtonRepeatedlyPressed(GameButton::BUTTON_RIGHT))
-	{
-		if (TEMPPosition.GetX() < 352)
-		{
-			TEMPPosition.SetX(TEMPPosition.GetX() + 1);
-		}
-	}
-	if (playerInput->IsGameButtonRepeatedlyPressed(GameButton::DPAD_LEFT) || playerInput->IsGameButtonRepeatedlyPressed(GameButton::BUTTON_LEFT))
-	{
-		if (TEMPPosition.GetX() > 0)
-		{
-			TEMPPosition.SetX(TEMPPosition.GetX() - 1);
-		}
-	}
-
-	if (playerInput->IsGameButtonRepeatedlyPressed(GameButton::DPAD_UP) || playerInput->IsGameButtonRepeatedlyPressed(GameButton::BUTTON_UP))
-	{
-		if (TEMPPosition.GetY() > 0)
-		{
-			TEMPPosition.SetY(TEMPPosition.GetY() - 1);
-		}
-	}
-	if (playerInput->IsGameButtonRepeatedlyPressed(GameButton::DPAD_DOWN) || playerInput->IsGameButtonRepeatedlyPressed(GameButton::BUTTON_DOWN))
-	{
-		if (TEMPPosition.GetY() < 224)
-		{
-			TEMPPosition.SetY(TEMPPosition.GetY() + 1);
-		}
-	}
-
-
-
-	if (Engine::Singleton().input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
-	{
-		Engine::Singleton().window->ChangeResolution(1920, 1080);
-	}
-	if (Engine::Singleton().input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
-	{
-		Engine::Singleton().window->ChangeResolution(1080, 720);
-	}
-	if (Engine::Singleton().input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
-	{
-		Engine::Singleton().window->ChangeResolution(352, 224);
-	}
-	if (Engine::Singleton().input->GetKey(SDL_SCANCODE_4) == KEY_DOWN)
-	{
-		Engine::Singleton().window->ChangeResolution(2560, 1440);
-	}
-	if (Engine::Singleton().input->GetKey(SDL_SCANCODE_6) == KEY_DOWN)
-	{
-		camera->SetCenterCameraViewWithLerp({ 176 / 2, 224 / 2 });
-	}
-	if (Engine::Singleton().input->GetKey(SDL_SCANCODE_7) == KEY_DOWN)
-	{
-		camera->SetCenterCameraViewWithLerp({ 352 / 2, 224 / 2 });
-	}
-	if (Engine::Singleton().input->GetKey(SDL_SCANCODE_8) == KEY_DOWN)
-	{
-		camera->SetCenterCameraView({ 352 / 2, 224 / 2 });
-	}
-	if (Engine::Singleton().input->GetKey(SDL_SCANCODE_9) == KEY_DOWN)
-	{
-		return false;
-	}
-
-	if (Engine::Singleton().input->GetKey(SDL_SCANCODE_P) == KEY_DOWN)
-	{
-		Engine::Singleton().window->ToggleFullScreen();
-	}
-
-	if (Engine::Singleton().input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
-	{
-		TEMPcheckingForKeyboardKeybinds = true;
-	}
-	if (Engine::Singleton().input->GetKey(SDL_SCANCODE_K) == KEY_DOWN)
-	{
-		TEMPcheckingForControllerButtonbinds = true;
-	}
-
-	if (TEMPcheckingForKeyboardKeybinds == true)
-	{
-		KeyboardKeyRebind();
-	}
-
-	if (TEMPcheckingForControllerButtonbinds == true)
-	{
-		ControllerKeyRebind();
-	}
-
-
-
 	return true;
 }
 
@@ -177,26 +60,4 @@ bool Scene::PostUpdate()
 bool Scene::CleanUp()
 {
 	return true;
-}
-
-void Scene::KeyboardKeyRebind()
-{
-	int key = -1;
-	key = Engine::Singleton().input->GetNextKeyboardKeyPressed();
-	if (key != -1)
-	{
-		playerInput->RemapKey(GameButton::DPAD_UP, key);
-		TEMPcheckingForKeyboardKeybinds = false;
-	}
-}
-
-void Scene::ControllerKeyRebind()
-{
-	int key = -1;
-	key = Engine::Singleton().input->GetNextControllerButtonPressed();
-	if (key != -1)
-	{
-		playerInput->RemapGamepadButton(GameButton::DPAD_UP, key);
-		TEMPcheckingForControllerButtonbinds = false;
-	}
 }

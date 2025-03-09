@@ -47,7 +47,7 @@ int GetIntFromConfig(const std::unordered_map<std::string, std::string>& config,
         }
         catch (const std::exception& e) // Catch conversion errors
         {
-            std::cerr << "Error converting '" << key << "' to int: " << e.what() << std::endl;
+            LOG("Error converting \"%s\" to int: %s", key, e.what());
         }
     }
     return defaultValue; // Return default value if key is not found or conversion fails

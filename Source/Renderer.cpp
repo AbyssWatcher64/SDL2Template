@@ -1,6 +1,11 @@
 #include "SDL2/SDL_ttf.h"
 #include "Renderer.hpp"
 #include "Renderable.hpp"
+#include "RenderableTexture.hpp"
+#include "RenderableRectangle.hpp"
+#include "RenderableCircle.hpp"
+#include "RenderableLine.hpp"
+#include "RenderableText.hpp"
 #include "Window.hpp"
 #include "Camera.hpp"
 #include "IniParser.hpp"
@@ -84,36 +89,15 @@ bool Renderer::PostUpdate()
 	
 	SortEntityDrawOrder();
 
-	std::vector<std::unique_ptr<Renderable>>* layers[LAYER_TOTALCOUNT] = { &backgroundLayer, &worldLayer, &entityLayer, &overEntityLayer, &debugLayer, &uiLayer, &textuiLayer	};
+	std::vector<std::unique_ptr<Renderable>>* layers[LAYER_TOTALCOUNT] = { &backgroundLayer, &worldLayer, &entityLayer, &overEntityLayer, &debugLayer, &uiLayer, &textuiLayer };
 
-	int i = 0;
 	for (auto* layer : layers)  // Iterate through layer pointers
 	{
-		for (const auto& r : *layer)  // Dereference the pointer to access the vector
+		for (const auto& renderable : *layer)  // Dereference the pointer to access the vector
 		{
-			switch (r->type)
-			{
-			case Renderable::RenderType::TEXTURE:
-				DrawTexture(r->texture, r->sourceRect, r->destRect, r->forceDrawInsideCamera, r->layer, r->angle, r->pivot.x, r->pivot.y);
-				break;
-
-			case Renderable::RenderType::RECTANGLE:
-				DrawRectangle(r->rect, r->color, r->forceDrawInsideCamera, r->filled);
-				break;
-
-			case Renderable::RenderType::LINE:
-				DrawLine(r->point1, r->point2, r->color, r->forceDrawInsideCamera);
-				break;
-
-			case Renderable::RenderType::CIRCLE:
-				DrawCircle(r->point1, r->radius, r->color, r->forceDrawInsideCamera);
-				break;
-			case Renderable::RenderType::TEXT:
-				DrawText(r->text, r->font, r->color, r->position, r->forceDrawInsideCamera);
-				break;
-			}
+			renderable->Draw();
 		}
-		layer->clear();  // Use `layer->clear()` since it's now a pointer to a vector
+		layer->clear(); 
 	}
 
 	SDL_RenderPresent(renderer);
@@ -123,6 +107,7 @@ bool Renderer::PostUpdate()
 bool Renderer::CleanUp()
 {
 	LOG("== Destroying SDL renderer ==");
+
 	if (renderer != nullptr)
 	{
 		SDL_DestroyRenderer(renderer);
@@ -205,7 +190,7 @@ void Renderer::UpdateOffset()
 	offset.SetY(-camera->GetCameraYPosition());
 }
 
-bool Renderer::QueueTexture(SDL_Texture* texture, SDL_Rect& sourceRect, SDL_Rect& destRect, bool forceDrawInsideCamera, int layer, int basePoint, double angle, int pivotX, int pivotY)
+bool Renderer::QueueTexture(SDL_Texture* texture, SDL_Rect& sourceRect, SDL_Rect& destRect, bool forceDrawInsideCamera, int layer, int renderBasePoint, float angle, SDL_Point pivot)
 {
 	bool ret = true;
 	if (!texture)
@@ -214,7 +199,8 @@ bool Renderer::QueueTexture(SDL_Texture* texture, SDL_Rect& sourceRect, SDL_Rect
 		ret = false;
 	}
 
-	std::unique_ptr<Renderable> renderable = std::make_unique<Renderable>(texture, sourceRect, destRect, forceDrawInsideCamera, layer, basePoint, angle, pivotX, pivotY);
+	std::unique_ptr<Renderable> renderable = std::make_unique<RenderableTexture>(texture, sourceRect, destRect, renderBasePoint, 
+																		  angle, pivot, forceDrawInsideCamera, layer);
 	AddRenderableToAppropriateLayer(std::move(renderable));
 
 	return ret;
@@ -222,7 +208,7 @@ bool Renderer::QueueTexture(SDL_Texture* texture, SDL_Rect& sourceRect, SDL_Rect
 
 bool Renderer::QueueDebugRectangle(const SDL_Rect& rect, SDL_Color color, bool filled, bool forceDrawInsideCamera, int layer)
 {
-	std::unique_ptr<Renderable> renderable = std::make_unique<Renderable>(rect, color, filled, forceDrawInsideCamera, layer);
+	std::unique_ptr<Renderable> renderable = std::make_unique<RenderableRectangle>(rect, color, filled, forceDrawInsideCamera, layer);
 	AddRenderableToAppropriateLayer(std::move(renderable));
 
 	return true;
@@ -231,23 +217,23 @@ bool Renderer::QueueDebugRectangle(const SDL_Rect& rect, SDL_Color color, bool f
 
 bool Renderer::QueueDebugLine(Vector2D start, Vector2D end, SDL_Color color, bool forceDrawInsideCamera, int layer)
 {
-	std::unique_ptr<Renderable> renderable = std::make_unique<Renderable>(start, end, color, forceDrawInsideCamera, layer);
+	std::unique_ptr<Renderable> renderable = std::make_unique<RenderableLine>(start, end, color, forceDrawInsideCamera, layer);
 	AddRenderableToAppropriateLayer(std::move(renderable));
 
 	return true;
 }
 
-bool Renderer::QueueDebugCircle(Vector2D center, int radius, SDL_Color color, bool forceDrawInsideCamera, int layer)
+bool Renderer::QueueDebugCircle(Vector2D centerPosition, int radius, SDL_Color color, bool forceDrawInsideCamera, int layer)
 {
-	std::unique_ptr<Renderable> renderable = std::make_unique<Renderable>(center, radius, color, forceDrawInsideCamera, layer);
+	std::unique_ptr<Renderable> renderable = std::make_unique<RenderableCircle>(centerPosition, radius, color, forceDrawInsideCamera, layer);
 	AddRenderableToAppropriateLayer(std::move(renderable));
 
 	return true;
 }
 
-bool Renderer::QueueText(const std::string& text, TTF_Font* font, Vector2D position, bool forceDrawInsideCamera, int layer, SDL_Color color)
+bool Renderer::QueueText(const std::string& text, Vector2D position, FontName font, SDL_Color color, bool forceDrawInsideCamera, int layer)
 {
-	std::unique_ptr<Renderable> renderable = std::make_unique<Renderable>(text, font, position, forceDrawInsideCamera, layer, color);
+	std::unique_ptr<Renderable> renderable = std::make_unique<RenderableText>(text, position, font, color, forceDrawInsideCamera, layer);
 	AddRenderableToAppropriateLayer(std::move(renderable));
 
 	return true;
@@ -255,10 +241,10 @@ bool Renderer::QueueText(const std::string& text, TTF_Font* font, Vector2D posit
 
 void Renderer::AddRenderableToAppropriateLayer(std::unique_ptr<Renderable> renderable)
 {
-	switch (renderable->layer)
+	switch (renderable->GetLayer())
 	{
 	default:
-		LOG("ERROR: Renderable's layer's number is wrong. The number is %d.", renderable->layer);
+		LOG("ERROR: Renderable's layer's number is wrong. The number is %d.", renderable->GetLayer());
 		LOG("The Renderable layer number should be between 0 and %d.", (Renderer::Layer::LAYER_TOTALCOUNT - 1));
 		break;
 	case Renderer::BACKGROUND:
@@ -295,7 +281,7 @@ void Renderer::SortEntityDrawOrder()
 	{
 		for (int j = 0; j < n - i - 1; j++)
 		{
-			if (entityLayer[j]->basePoint > entityLayer[j + 1]->basePoint)
+			if (entityLayer[j]->GetRenderBasePoint() > entityLayer[j + 1]->GetRenderBasePoint())
 				swap(entityLayer[j], entityLayer[j + 1]);
 		}
 	}
@@ -305,11 +291,12 @@ void Renderer::UpdateEntitiesBasePoint()
 {
 	for (const auto& renderable : entityLayer)
 	{
-		renderable->basePoint = renderable->basePoint + renderable->destRect.y;
+		renderable->SetRenderBasePoint(renderable->GetRenderBasePoint() + renderable->GetYPosition());
+		//renderable->SetRenderBasePoint(renderable->GetRenderBasePoint() + renderable->destRect.y;
 	}
 }
 
-void Renderer::DrawTexture(SDL_Texture* texture, SDL_Rect& sourceRect, SDL_Rect& destRect, bool forceDrawInsideCamera, int layer, double angle, int pivotX, int pivotY)
+void Renderer::DrawTexture(SDL_Texture* texture, const SDL_Rect& sourceRect, const SDL_Rect& destRect, float angle, SDL_Point pivot, bool forceDrawInsideCamera)
 {
 	if (!texture)
 	{
@@ -317,18 +304,17 @@ void Renderer::DrawTexture(SDL_Texture* texture, SDL_Rect& sourceRect, SDL_Rect&
 		return;
 	}
 
-	destRect.x += forceDrawInsideCamera ? 0 : offset.GetX();
-	destRect.y += forceDrawInsideCamera ? 0 : offset.GetY();
+	int offsetX = forceDrawInsideCamera ? 0 : offset.GetX();
+	int offsetY = forceDrawInsideCamera ? 0 : offset.GetY();
+	SDL_Rect renderingRectangle({ destRect.x + offsetX, destRect.y + offsetY, destRect.w, destRect.h });
 
-	SDL_Point pivot = { pivotX, pivotY };
-
-	if (SDL_RenderCopyEx(renderer, texture, &sourceRect, &destRect, angle, &pivot, SDL_FLIP_NONE) != 0)
+	if (SDL_RenderCopyEx(renderer, texture, &sourceRect, &renderingRectangle, (double)angle, &pivot, SDL_FLIP_NONE) != 0)
 	{
 		LOG("SDL_RenderCopyEx failed: %s", SDL_GetError());
 	}
 }
 
-void Renderer::DrawRectangle(SDL_Rect& rectangle, SDL_Color color, bool forceDrawInsideCamera, bool filled)
+void Renderer::DrawRectangle(const SDL_Rect& rectangle, SDL_Color color, bool filled, bool forceDrawInsideCamera)
 {
 	SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
 
@@ -384,11 +370,14 @@ void Renderer::DrawCircleInternal(Vector2D vector, int radius, bool forceDrawIns
 	SDL_RenderDrawPoints(renderer, points, 360);
 }
 
-// Not working atm
-void Renderer::DrawText(const std::string& text, TTF_Font* font, SDL_Color color, Vector2D position, bool forceDrawInsideCamera)
+void Renderer::DrawText(const std::string& text, Vector2D position, TTF_Font* font, SDL_Color color, bool forceDrawInsideCamera)
 {
 	SDL_Texture* textTexture = CreateTextTexture(text, font, color);
-	if (!textTexture) return;
+	if (!textTexture)
+	{
+		font = nullptr;
+		return;
+	}
 
 	int offsetX = forceDrawInsideCamera ? 0 : offset.GetX();
 	int offsetY = forceDrawInsideCamera ? 0 : offset.GetY();

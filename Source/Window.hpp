@@ -49,12 +49,8 @@ public:
 
 private:
 	SDL_Window* window;
-
 	std::string gameTitle;
 	std::string engineIconPath;
-	bool isFullScreen = false;
 	int width;
 	int height;
-
-	bool TMP_SETFULLSCREEN = false;
 };

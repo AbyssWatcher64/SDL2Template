@@ -3,7 +3,7 @@
 
 #include "Module.hpp"
 #include "Vector2D.hpp"
-#include "SDL2/SDL_ttf.h"
+#include "Fonts.hpp"
 
 class Renderable;
 class Camera;
@@ -22,7 +22,6 @@ public:
 		TEXT_UI = 6,
 		LAYER_TOTALCOUNT
 	};
-
 
 	// Constructor
 	Renderer();
@@ -50,32 +49,29 @@ public:
 	void UpdateOffset();
 
 	// Drawing
-	bool QueueTexture(SDL_Texture* texture, SDL_Rect& sourceRect, SDL_Rect& destRect, bool forceDrawInsideCamera = false, int layer = Renderer::BACKGROUND, int basePoint = 0, double angle = 0, int pivotX = INT_MAX, int pivotY = INT_MAX);
-	bool QueueDebugRectangle(const SDL_Rect& rect, SDL_Color color, bool filled, bool forceDrawInsideCamera = false, int layer = Renderer::DEBUG);
+	bool QueueTexture(SDL_Texture* texture, SDL_Rect& sourceRect, SDL_Rect& destRect, bool forceDrawInsideCamera = false, int layer = Renderer::BACKGROUND, int renderBasePoint = 0, float angle = 0, SDL_Point pivot = { INT_MAX,INT_MAX });
+	bool QueueDebugRectangle(const SDL_Rect& rect, SDL_Color color, bool filled = true, bool forceDrawInsideCamera = false, int layer = Renderer::DEBUG);
 	bool QueueDebugLine(Vector2D start, Vector2D end, SDL_Color color, bool forceDrawInsideCamera = false, int layer = Renderer::DEBUG);
 	bool QueueDebugCircle(Vector2D center, int radius, SDL_Color color, bool forceDrawInsideCamera = false, int layer = Renderer::DEBUG);
-	bool QueueText(const std::string& text, TTF_Font* font, Vector2D position, bool forceDrawInsideCamera = true, int layer = Renderer::TEXT_UI, SDL_Color color = { 255, 255, 255, 255 });
-
-	void AddRenderableToAppropriateLayer(std::unique_ptr<Renderable> renderable);
-	void SortEntityDrawOrder();
-	void UpdateEntitiesBasePoint();
-
-	void DrawTexture(SDL_Texture* texture, SDL_Rect& sourceRect, SDL_Rect& destRect, bool forceDrawInsideCamera, int layer = Renderer::BACKGROUND, double angle = 0.0, int pivotX = 0, int pivotY = 0);
-	void DrawRectangle(SDL_Rect& rectangle, SDL_Color color, bool forceDrawInsideCamera, bool filled = true);
-	void DrawLine(Vector2D originVector, Vector2D endVector, SDL_Color color, bool forceDrawInsideCamera);
-	bool DrawCircle(Vector2D vector, int radius, SDL_Color rgb, bool forceDrawInsideCamera);
-	void DrawCircleInternal(Vector2D vector, int radius, bool forceDrawInsideCamera);
-	void DrawText(const std::string& text, TTF_Font* font, SDL_Color color, Vector2D position, bool forceDrawInsideCamera);
-
-	SDL_Texture* CreateTextTexture(const std::string& text, TTF_Font* font, SDL_Color color);
-
-	void SetBackgroundColor(SDL_Color color);
+	bool QueueText(const std::string& text, Vector2D position, FontName font = DEFAULT_FONT, SDL_Color color = { 255, 255, 255, 255 }, bool forceDrawInsideCamera = true, int layer = Renderer::TEXT_UI);
 
 	// Getters
 	SDL_Renderer* GetRenderer() const;
 	std::shared_ptr<Camera> GetCamera();
 
-	// FadeIn & FadeOut will come from another class
+	void DrawTexture(SDL_Texture* texture, const SDL_Rect& sourceRect, const SDL_Rect& destRect, float angle, SDL_Point pivot, bool forceDrawInsideCamera);
+	void DrawRectangle(const SDL_Rect& rectangle, SDL_Color color, bool filled, bool forceDrawInsideCamera);
+	void DrawLine(Vector2D originVector, Vector2D endVector, SDL_Color color, bool forceDrawInsideCamera);
+	bool DrawCircle(Vector2D vector, int radius, SDL_Color rgb, bool forceDrawInsideCamera);
+	void DrawCircleInternal(Vector2D vector, int radius, bool forceDrawInsideCamera);
+	void DrawText(const std::string& text, Vector2D position, TTF_Font* font, SDL_Color color, bool forceDrawInsideCamera);
+
+private:
+	void AddRenderableToAppropriateLayer(std::unique_ptr<Renderable> renderable);
+	void SortEntityDrawOrder();
+	void UpdateEntitiesBasePoint();
+
+	SDL_Texture* CreateTextTexture(const std::string& text, TTF_Font* font, SDL_Color color);
 
 private:
 	SDL_Renderer* renderer;
@@ -100,8 +96,6 @@ private:
 private:
 	// Base logical resolution
 	Vector2D offset = Vector2D();
-	const int baseWidth = 352;
-	const int baseHeight = 224;
 	const float baseAspectRatio = static_cast<float>(baseWidth) / baseHeight;
 };
 

@@ -39,7 +39,6 @@ bool Window::CleanUp()
 {
 	LOG("Destroying SDL window.");
 
-
 	// Quit SDL subsystems
 	SDL_Quit();
 
@@ -72,11 +71,10 @@ WindowFlagBools Window::InitializeWindowFlags()
 	std::unordered_map<std::string, std::string> configFile = LoadConfig("config.ini");
 
 	WindowFlagBools flagBools{};
-	flagBools.fullscreen = GetBoolFromConfig(configFile, "fullscreen");
 	flagBools.borderless = GetBoolFromConfig(configFile, "borderless");
 	flagBools.resizable = GetBoolFromConfig(configFile, "resizable");
 	flagBools.fullscreenWindow = GetBoolFromConfig(configFile, "fullscreen_window");
-
+	flagBools.fullscreen = GetBoolFromConfig(configFile, "fullscreen");
 	return flagBools;
 }
 
@@ -146,15 +144,28 @@ void Window::ChangeResolution(int newWidth, int newHeight)
 
 void Window::ToggleFullScreen()
 {
-	LOG("Setting FullScreen with resolution: %d x %d", width, height);
+	std::unordered_map<std::string, std::string> configFile = LoadConfig("config.ini");
+	bool isCurrentlyFullscreen = GetBoolFromConfig(configFile, "fullscreen");
 
-	TMP_SETFULLSCREEN = !TMP_SETFULLSCREEN;
+	if (!isCurrentlyFullscreen)
+	{
+		LOG("Setting FullScreen with resolution: %d x %d", width, height);
+	}
+	else
+	{
+		LOG("Setting Windowed mode with resolution: %d x %d", width, height);
+	}
+
+	isCurrentlyFullscreen = !isCurrentlyFullscreen;
+	configFile.find("fullscreen")->second = isCurrentlyFullscreen ? "true" : "false";
+	SaveConfig("config.ini", configFile);
+
 	Uint32 flags = InitializeAndSetWindowFlags();
 	SDL_SetWindowFullscreen(window, flags);
 
 	SDL_GetWindowSize(window, &width, &height);
 	Engine::Singleton().renderer->ResizeViewPort(width, height);
-	if (!TMP_SETFULLSCREEN)
+	if (!isCurrentlyFullscreen)
 	{
 		SDL_SetWindowPosition(window, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
 	}

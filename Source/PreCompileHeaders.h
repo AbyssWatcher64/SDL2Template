@@ -13,5 +13,6 @@
 #include "Timer.hpp"
 #include "Log.hpp"
 #include "Vector2D.hpp"
+#include "Globals.hpp"
 
 #endif

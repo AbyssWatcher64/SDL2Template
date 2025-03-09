@@ -155,7 +155,19 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Source\PreCompileHeaders.cpp" />
-    <ClCompile Include="Source\Renderable.cpp">
+    <ClCompile Include="Source\RenderableCircle.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Source\RenderableLine.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Source\RenderableRectangle.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Source\RenderableText.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Source\RenderableTexture.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Source\Renderer.cpp">
@@ -186,6 +198,7 @@
     <ClInclude Include="Source\Engine.hpp" />
     <ClInclude Include="Source\EngineFSM.hpp" />
     <ClInclude Include="Source\Fonts.hpp" />
+    <ClInclude Include="Source\Globals.hpp" />
     <ClInclude Include="Source\IniParser.hpp" />
     <ClInclude Include="Source\Input.hpp" />
     <ClInclude Include="Source\Log.hpp" />
@@ -195,6 +208,11 @@
     <ClInclude Include="Source\PrecisionTimer.hpp" />
     <ClInclude Include="Source\PreCompileHeaders.h" />
     <ClInclude Include="Source\Renderable.hpp" />
+    <ClInclude Include="Source\RenderableCircle.hpp" />
+    <ClInclude Include="Source\RenderableLine.hpp" />
+    <ClInclude Include="Source\RenderableRectangle.hpp" />
+    <ClInclude Include="Source\RenderableText.hpp" />
+    <ClInclude Include="Source\RenderableTexture.hpp" />
     <ClInclude Include="Source\Renderer.hpp" />
     <ClInclude Include="Source\Scene.hpp" />
     <ClInclude Include="Source\Textures.hpp" />
